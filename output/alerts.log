@@ -1,2 +1,4 @@
 2026-10-14T16:37:23+05:30 TEST fired=['test_alert'] delivered=['github-issue']
     test_alert: Test alert - delivery pipeline is working. Real alerts fire on FII positioning shifts, VIX-rank extremes, IV/realized gaps and PCR extremes.
+2026-10-14T16:39:29+05:30 TEST fired=['test_alert'] delivered=['github-issue']
+    test_alert: Test alert - delivery pipeline is working. Real alerts fire on FII positioning shifts, VIX-rank extremes, IV/realized gaps and PCR extremes.

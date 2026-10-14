@@ -6,12 +6,15 @@
     bhavcopy 20261013: 37400 rows
     NIFTY: live chain unavailable (throttled); using bhavcopy
     NIFTY (bhavcopy 2026-10-13): spot=22722.0, ATM IV=12.91, PCR=1.389
-    BANKNIFTY: live chain unavailable (throttled); using bhavcopy
     BANKNIFTY (bhavcopy 2026-10-13): spot=55481.1, ATM IV=14.08, PCR=1.072
+    FINNIFTY (bhavcopy 2026-10-13): spot=25228.5, ATM IV=16.89, PCR=0.81
+    MIDCPNIFTY (bhavcopy 2026-10-13): spot=13762.0, ATM IV=17.35, PCR=0.964
+    HDFCBANK (bhavcopy 2026-10-13): spot=714.0, ATM IV=22.55, PCR=0.555
+    RELIANCE (bhavcopy 2026-10-13): spot=1166.7, ATM IV=24.04, PCR=0.603
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  14-Oct-2026 15:45 IST
+  NSE DERIVATIVES MONITOR  |  14-Oct-2026 16:39 IST
 ==========================================================================
 
 L1 POSITIONING - participant OI (2026-10-13 vs 2026-10-06)
@@ -37,6 +40,30 @@ L2 VOL / L3 MICROSTRUCTURE - BANKNIFTY
     Skew (5% OTM put-call) 3.63   PCR 1.07   walls: call 58,000 / put 55,000   max pain 55,600
     Term structure ATM IV: 27-Oct: 14.08   23-Nov: 13.34   29-Dec: 13.87
 
+L2 VOL / L3 MICROSTRUCTURE - FINNIFTY
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 25,228.55  basis +126.5 (fut 27-Oct)
+    ATM IV 16.89%
+    Skew (5% OTM put-call) 1.47   PCR 0.81   walls: call 26,000 / put 24,900   max pain 25,000
+    Term structure ATM IV: 27-Oct: 16.89   23-Nov: 17.99   29-Dec: 16.82
+
+L2 VOL / L3 MICROSTRUCTURE - MIDCPNIFTY
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 13,761.95  basis +40.7 (fut 27-Oct)
+    ATM IV 17.35%
+    Skew (5% OTM put-call) 5.81   PCR 0.96   walls: call 14,500 / put 13,000   max pain 13,800
+    Term structure ATM IV: 27-Oct: 17.35   23-Nov: 18.31   29-Dec: 18.39
+
+L2 VOL / L3 MICROSTRUCTURE - HDFCBANK
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 714.00  basis +4.9 (fut 27-Oct)
+    ATM IV 22.55%
+    Skew (5% OTM put-call) -0.04   PCR 0.56   walls: call 750 / put 700   max pain 720
+    Term structure ATM IV: 27-Oct: 22.55   23-Nov: 21.57   29-Dec: 22.59
+
+L2 VOL / L3 MICROSTRUCTURE - RELIANCE
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 1,166.70  basis +7.6 (fut 27-Oct)
+    ATM IV 24.04%
+    Skew (5% OTM put-call) -2.66   PCR 0.60   walls: call 1,250 / put 1,160   max pain 1,200
+    Term structure ATM IV: 27-Oct: 24.04   23-Nov: 23.64   29-Dec: 22.83
+
   VOL CONTEXT
     India VIX 14.63  1y rank 71  1y range 9.15 - 27.89
     NIFTY realized vol: 10d 17.09% / 21d 14.84%  (compare with ATM IV)
@@ -46,5 +73,17 @@ L2 VOL / L3 MICROSTRUCTURE - BANKNIFTY
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1545.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1545.html
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1639.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1639.html
+trends.html written: 3 panels, 752 date points, 51 KB
+  - positioning: 246 points, 4 series
+  - options_pcr: 246 points, 4 series
+  - volatility: 260 points, 8 series
+
+NSE Monitor TEST alert - 14-Oct-2026 16:39 IST
+
+* Test alert - delivery pipeline is working. Real alerts fire on FII positioning shifts, VIX-rank extremes, IV/realized gaps and PCR extremes.
+
+Dashboard: https://posu303-tech.github.io/nse-deriv-monitor/
+
+  github issue: created https://api.github.com/repos/posu303-tech/nse-deriv-monitor/issues/2
