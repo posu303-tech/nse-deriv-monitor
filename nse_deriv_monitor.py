@@ -337,7 +337,7 @@ def fetch_participant_history(conn, days=21, max_files=12, verbose=True):
         except Exception as e:  # noqa: BLE001
             if verbose:
                 print(f"    participant OI {ds_iso}: {type(e).__name__}")
-        time.sleep(0.2)
+        time.sleep(0.4 if max_files > 60 else 0.2)
     return fetched
 
 

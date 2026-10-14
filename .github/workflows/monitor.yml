@@ -53,25 +53,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          STAMP=$(date +%Y%m%d_%H%M)
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git fetch origin gh-pages --depth=1 || true
           REPORT=$(ls -t output/monitor_*.html | head -1)
           REPORT_JSON=$(ls -t output/monitor_*.json | head -1)
-          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
-            git worktree add ../pages origin/gh-pages
-          else
-            git worktree add --detach ../pages
-          fi
-          cd ../pages
-          git checkout -B gh-pages 2>/dev/null || git checkout --orphan gh-pages
-          cp "../$REPORT" "monitor_${STAMP}.html"
-          cp "../$REPORT" index.html
-          cp "../$REPORT_JSON" latest.json
+          STAMP=$(basename "$REPORT" .html | sed 's/^monitor_//')
+          REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          rm -rf /tmp/pages
+          git worktree add --detach /tmp/pages HEAD
+          cd /tmp/pages
+          git checkout --orphan gh-pages
+          git rm -rf . >/dev/null 2>&1 || true
+          cp "$GITHUB_WORKSPACE/$REPORT" "monitor_${STAMP}.html"
+          cp "$GITHUB_WORKSPACE/$REPORT" index.html
+          cp "$GITHUB_WORKSPACE/$REPORT_JSON" latest.json
           git add -A
-          git commit -m "report ${STAMP}" || echo "no changes to commit"
+          git commit -m "report ${STAMP}"
           git push "$REPO_URL" gh-pages --force
 
       - name: Commit history to main
