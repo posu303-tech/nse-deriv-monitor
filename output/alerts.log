@@ -4,3 +4,4 @@
     test_alert: Test alert - delivery pipeline is working. Real alerts fire on FII positioning shifts, VIX-rank extremes, IV/realized gaps and PCR extremes.
 2026-10-14T18:40:07+05:30 weekly-digest fired delivered=['log-only']
 2026-10-14T18:42:05+05:30 weekly-digest fired delivered=['log-only']
+2026-10-14T18:44:00+05:30 weekly-digest fired delivered=['github-issue']
