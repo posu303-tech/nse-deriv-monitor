@@ -33,6 +33,9 @@ python nse_deriv_monitor.py --data-dir D:\nse-data --out-dir D:\nse-reports
 
 ## What you get
 
+- **"What changed" block** at the top of every report — a one-line headline plus
+  deltas vs the previous session (FII positioning d/d & w/w, cash flows, VIX level
+  and rank, per-symbol spot %, IV, PCR and wall moves)
 - **Console report** (the three layers, ready to read over a coffee)
 - **JSON summary** in `output/monitor_YYYYMMDD_HHMM.json` (machine-readable for further analysis)
 - **HTML dashboard** in `output/monitor_YYYYMMDD_HHMM.html` (open in browser)

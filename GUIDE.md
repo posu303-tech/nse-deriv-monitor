@@ -9,6 +9,18 @@ also the order professional desks use (positioning → volatility → microstruc
 4. **What changed this week?** (the deltas, not the levels)
 5. **What would flip the picture?** (trigger conditions)
 
+### The "What changed" block (read this first)
+
+Every report opens with a delta block: a one-line headline plus bullets vs the
+previous session - FII positioning (d/d and w/w), cash flows, India VIX level and
+rank deltas, per-symbol spot %, IV delta, PCR delta and wall moves, and realized vol.
+It answers question 4 before everything else, so the fastest daily routine is:
+
+> read the headline → scan the bullets → only then go into L1 → L2 → L3 for context.
+
+Note: participant-OI deltas need two sessions of history, and per-symbol deltas need
+two snapshots (they fill in automatically from the second scheduled run).
+
 > A worked example using the 14-Oct-2026 report appears in each section. Treat it
 > as a reading exercise, not a recommendation.
 

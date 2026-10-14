@@ -737,10 +737,17 @@ def vol_context(data_dir, verbose=True):
         rank, pc = rank_pct(win, vals[-1])
         ctx["vix"] = {"last": vals[-1], "rank_1y": rank, "pct_1y": pc,
                       "min_1y": min(win), "max_1y": max(win), "n": len(win)}
+        if len(vals) >= 2:
+            ctx["vix"]["prev_last"] = vals[-2]
+            win_prev = vals[-253:-1] if len(vals) >= 253 else vals[:-1]
+            rank_prev, _ = rank_pct(win_prev, vals[-2])
+            ctx["vix"]["rank_1y_prev"] = rank_prev
     nifty_series = cached_series(os.path.join(data_dir, "nifty_px_cache.json"), "^NSEI", 400)
     if nifty_series:
         closes = [h["close"] for h in nifty_series]
         ctx["nifty_realvol"] = {"rv10": realized_vol(closes, 10), "rv21": realized_vol(closes, 21)}
+        if len(closes) > 22:
+            ctx["nifty_realvol"]["rv21_prev"] = realized_vol(closes[:-1], 21)
     return ctx
 
 
@@ -818,6 +825,140 @@ def build_summary(conn, symbols, verbose=True):
     return s
 
 
+# ================================================================ changes ("what changed")
+
+def compute_changes(conn, summary, symbols):
+    """Delta report vs the previous session: the 'what changed?' block."""
+    ch = {"headline": None, "lines": [], "raw": {}, "symbols": {}}
+
+    # ---------------- participant positioning
+    part_lines = []
+    p = summary.get("participant") or {}
+    fii = (p.get("rows") or {}).get("FII") or {}
+    fii_net = fii.get("idx_fut_net")
+    fii_wow = None
+    if fii.get("idx_fut_net_prev") is not None and fii_net is not None:
+        fii_wow = fii_net - fii["idx_fut_net_prev"]
+    fii_dod = None
+    dates = [r[0] for r in conn.execute("SELECT DISTINCT date FROM participant_oi ORDER BY date")]
+    if len(dates) >= 2 and fii_net is not None:
+        prev = conn.execute(
+            "SELECT idx_fut_long, idx_fut_short FROM participant_oi "
+            "WHERE date=? AND participant='FII'", (dates[-2],)).fetchone()
+        if prev and prev[0] is not None:
+            fii_dod = fii_net - ((prev[0] or 0) - (prev[1] or 0))
+    if fii_net is not None:
+        parts = []
+        if fii_dod is not None:
+            parts.append(f"{fii_dod:+,.0f} d/d")
+        if fii_wow is not None:
+            parts.append(f"{fii_wow:+,.0f} w/w")
+        basis = fii_dod if fii_dod is not None else fii_wow
+        trend = ""
+        if basis is not None and abs(basis) >= 2000:
+            trend = " - covering / reducing shorts" if basis > 0 else " - adding shorts / hedging more"
+        part_lines.append(f"FII index futures net {fii_net:,.0f}"
+                          + (f" ({', '.join(parts)})" if parts else "") + trend)
+    ch["raw"].update({"fii_dod": fii_dod, "fii_wow": fii_wow})
+
+    # ---------------- cash flows
+    cash_lines = []
+    by_date = {}
+    for d, cat, net in conn.execute("SELECT date, category, net FROM cash_flow ORDER BY date"):
+        by_date.setdefault(d, {})[cat] = net
+    ds = sorted(by_date)
+    if ds:
+        cur = by_date[ds[-1]]
+        line = f"Cash market: FII net {signed(cur.get('FII/FPI'))} cr"
+        if len(ds) >= 2 and by_date[ds[-2]].get("FII/FPI") is not None:
+            line += f" (prev {signed(by_date[ds[-2]].get('FII/FPI'))} cr)"
+        if cur.get("DII") is not None:
+            line += f"; DII net {signed(cur.get('DII'))} cr"
+        cash_lines.append(line)
+
+    # ---------------- volatility context
+    vol_lines = []
+    vix = summary.get("vix") or {}
+    rank_delta = None
+    if vix.get("last") is not None and vix.get("prev_last") is not None:
+        dl = vix["last"] - vix["prev_last"]
+        line = f"India VIX {vix['last']:.2f} ({dl:+.2f})"
+        if vix.get("rank_1y") is not None and vix.get("rank_1y_prev") is not None:
+            rank_delta = vix["rank_1y"] - vix["rank_1y_prev"]
+            line += f", 1y rank {vix['rank_1y']:.0f} ({rank_delta:+.0f} pts)"
+        ch["raw"]["vix_delta"] = dl
+        vol_lines.append(line)
+    ch["raw"]["rank_delta"] = rank_delta
+
+    # ---------------- per-symbol deltas
+    sym_lines = []
+    for sym in symbols:
+        rows = conn.execute(
+            "SELECT date, spot, atm_iv, pcr, max_ce_oi_strike, max_pe_oi_strike "
+            "FROM iv_snapshot WHERE symbol=? ORDER BY date", (sym,)).fetchall()
+        if not rows:
+            continue
+        cur = rows[-1]
+        if len(rows) < 2:
+            sym_lines.append(f"{sym}: first snapshot ({cur[0]}) - deltas start next session")
+            ch["symbols"][sym] = {"first": True}
+            continue
+        prev = rows[-2]
+        seg = []
+        if cur[1] and prev[1]:
+            seg.append(f"spot {(cur[1] / prev[1] - 1) * 100:+.1f}%")
+        iv_delta = (cur[2] - prev[2]) if (cur[2] and prev[2]) else None
+        if iv_delta is not None:
+            seg.append(f"IV {cur[2]:.2f}% ({iv_delta:+.2f} pts)")
+        pcr_delta = (cur[3] - prev[3]) if (cur[3] and prev[3]) else None
+        if pcr_delta is not None:
+            seg.append(f"PCR {cur[3]:.2f} ({pcr_delta:+.2f})")
+        wall_moves = []
+        if cur[4] and prev[4] and cur[4] != prev[4]:
+            wall_moves.append(f"call wall {prev[4]:,.0f}->{cur[4]:,.0f}")
+        if cur[5] and prev[5] and cur[5] != prev[5]:
+            wall_moves.append(f"put wall {prev[5]:,.0f}->{cur[5]:,.0f}")
+        seg.append("; ".join(wall_moves) if wall_moves else "walls unchanged")
+        sym_lines.append(f"{sym} ({prev[0]} -> {cur[0]}): " + "; ".join(seg))
+        ch["symbols"][sym] = {"iv_delta": iv_delta, "pcr_delta": pcr_delta,
+                              "walls_changed": bool(wall_moves)}
+
+    # ---------------- realized vol
+    rv_lines = []
+    rv = summary.get("nifty_realvol") or {}
+    if rv.get("rv21") and rv.get("rv21_prev"):
+        rv_delta = rv["rv21"] - rv["rv21_prev"]
+        ch["raw"]["rv21_delta"] = rv_delta
+        rv_lines.append(f"NIFTY realized vol 21d {rv['rv21']:.2f}% ({rv_delta:+.2f})")
+
+    # ---------------- headline
+    bits = []
+    basis = fii_wow if fii_wow is not None else fii_dod
+    if basis is not None:
+        if abs(basis) < 2000:
+            bits.append("FII futures flat")
+        elif abs(basis) < 25000:
+            bits.append("FII covering slightly" if basis > 0 else "FII adding shorts slightly")
+        else:
+            bits.append("FII covering" if basis > 0 else "FII adding shorts")
+    if rank_delta is not None:
+        bits.append("VIX rank unchanged" if abs(rank_delta) < 2 else f"VIX rank {rank_delta:+.0f}")
+    for sym in ("NIFTY", "BANKNIFTY"):
+        d = ch["symbols"].get(sym) or {}
+        if d.get("first"):
+            bits.append(f"{sym} first snapshot")
+        elif d:
+            if d.get("walls_changed"):
+                bits.append(f"{sym} walls moved")
+            else:
+                bits.append(f"{sym} walls held")
+            if d.get("pcr_delta") is not None:
+                bits.append(f"PCR {d['pcr_delta']:+.2f}")
+    ch["headline"] = "; ".join(bits) if bits else "not enough history yet"
+    ch["lines"] = part_lines + cash_lines + vol_lines + sym_lines + rv_lines
+    return ch
+
+
 # ================================================================ rendering
 
 def fmt(v, digits=2, na="-"):
@@ -874,6 +1015,16 @@ def render_console(summary, symbols):
     out.append("=" * 74)
     out.append(f"  NSE DERIVATIVES MONITOR  |  {now.strftime('%d-%b-%Y %H:%M IST')}")
     out.append("=" * 74)
+
+    ch = summary.get("changes") or {}
+    if ch.get("headline") or ch.get("lines"):
+        out.append("")
+        out.append("WHAT CHANGED (since previous session)")
+        if ch.get("headline"):
+            out.append(f"  > {ch['headline']}")
+        for line in ch.get("lines", []):
+            out.append(f"  - {line}")
+        out.append("-" * 74)
 
     p = summary.get("participant")
     if p:
@@ -972,9 +1123,24 @@ table{border-collapse:collapse;width:100%;margin:8px 0}
 th,td{padding:7px 10px;border-bottom:1px solid #26314a;text-align:right;font-size:13px}
 th{color:#9fb3d1} td:first-child,th:first-child{text-align:left}
 .pos{color:#53d769}.neg{color:#ff6b6b}.muted{color:#7d8fa9;font-size:12px}
+.change{background:#182035;border-left:3px solid #6ea8fe;border-radius:8px;
+        padding:10px 14px;margin:14px 0}
+.change .ct{font-size:11px;color:#8ea3c4;text-transform:uppercase;letter-spacing:.6px}
+.change .hl{font-size:14px;font-weight:600;margin:5px 0}
+.change ul{margin:6px 0 2px 18px;padding:0}
+.change li{font-size:13px;color:#cdd9ee;margin:3px 0}
 </style></head><body>"""]
     parts.append(f"<h1>NSE Derivatives Monitor</h1><div class='muted'>Generated "
                  f"{esc(summary['generated_at'])}</div>")
+
+    ch = summary.get("changes") or {}
+    if ch.get("headline") or ch.get("lines"):
+        parts.append("<div class='change'><div class='ct'>What changed "
+                     "(since previous session)</div>")
+        if ch.get("headline"):
+            parts.append(f"<div class='hl'>{esc(ch['headline'])}</div>")
+        parts.append("<ul>" + "".join(f"<li>{esc(l)}</li>"
+                                      for l in ch.get("lines", [])) + "</ul></div>")
 
     p = summary.get("participant")
     if p:
@@ -1109,6 +1275,7 @@ def main():
 
     summary = build_summary(conn, args.symbols)
     summary.update(vol_context(args.data_dir))
+    summary["changes"] = compute_changes(conn, summary, args.symbols)
 
     text = render_console(summary, args.symbols)
     print()
