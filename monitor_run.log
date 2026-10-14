@@ -1,0 +1,50 @@
+[1/4] Participant-wise OI (NSE archives)...
+      -> 0 new file(s) stored
+[2/4] FII/DII cash flows...
+    cash flow: 2 rows
+[3/4] Option chain snapshots...
+    bhavcopy 20261013: 37400 rows
+    NIFTY: live chain unavailable (throttled); using bhavcopy
+    NIFTY (bhavcopy 2026-10-13): spot=22722.0, ATM IV=12.91, PCR=1.389
+    BANKNIFTY: live chain unavailable (throttled); using bhavcopy
+    BANKNIFTY (bhavcopy 2026-10-13): spot=55481.1, ATM IV=14.08, PCR=1.072
+[4/4] Vol context (India VIX / realized vol caches)...
+
+==========================================================================
+  NSE DERIVATIVES MONITOR  |  14-Oct-2026 15:38 IST
+==========================================================================
+
+L1 POSITIONING - participant OI (2026-10-13 vs 2026-10-06)
+  Participant     Fut L     Fut S        Net   d vs ref     L/S  Opt PCR
+  Client      289087     59230     229857   -7,243ct   83.0%     1.17
+  DII          48831     14300      34531     +630ct   77.3%     0.76
+  FII          35416    324911    -289495   +4,230ct    9.8%     1.15
+  Pro          57667     32560      25107   +2,383ct   63.9%     1.05
+    (FII net short futures ~ hedging flows; PCR > 1 = put-heavy positioning)
+
+  FII / DII CASH MARKET (Rs crore)
+    2026-10-13:  FII -1,305.1   DII +2,439.2
+
+L2 VOL / L3 MICROSTRUCTURE - NIFTY
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 22,721.95
+    ATM IV 12.91%
+    Skew (5% OTM put-call) 4.39   PCR 1.39   walls: call 23,000 / put 22,500   max pain 22,700
+    Term structure ATM IV: 19-Oct: 12.91   27-Oct: 12.60   03-Nov: 12.90
+
+L2 VOL / L3 MICROSTRUCTURE - BANKNIFTY
+    snapshot 2026-10-13  [bhavcopy (EOD)]  spot 55,481.05  basis +297.1 (fut 27-Oct)
+    ATM IV 14.08%
+    Skew (5% OTM put-call) 3.63   PCR 1.07   walls: call 58,000 / put 55,000   max pain 55,600
+    Term structure ATM IV: 27-Oct: 14.08   23-Nov: 13.34   29-Dec: 13.87
+
+  VOL CONTEXT
+    India VIX 14.63  1y rank 71  1y range 9.15 - 27.89
+    NIFTY realized vol: 10d 17.09% / 21d 14.84%  (compare with ATM IV)
+
+--------------------------------------------------------------------------
+  Framework: L1 positioning (weekly) -> L2 volatility (IV rank, skew)
+  -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
+--------------------------------------------------------------------------
+
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1538.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1538.html
