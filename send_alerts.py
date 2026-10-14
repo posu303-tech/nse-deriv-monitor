@@ -229,7 +229,7 @@ def _github_headers(token):
     }
 
 
-def send_github_issue(title, body):
+def send_github_issue(title, body, label="alert", color="d73a4a"):
     token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
@@ -237,19 +237,19 @@ def send_github_issue(title, body):
     api = f"https://api.github.com/repos/{repo}"
     hdrs = _github_headers(token)
     try:
-        # ensure the 'alert' label exists (ignore 422 = already exists)
+        # ensure the label exists (ignore 422 = already exists)
         try:
             req = urllib.request.Request(
                 api + "/labels",
-                data=json.dumps({"name": "alert", "color": "d73a4a",
-                                 "description": "NSE monitor alert"}).encode(),
+                data=json.dumps({"name": label, "color": color,
+                                 "description": "NSE monitor"}).encode(),
                 headers=hdrs, method="POST")
             urllib.request.urlopen(req, timeout=15)
         except Exception:
             pass
         req = urllib.request.Request(
             api + "/issues",
-            data=json.dumps({"title": title, "body": body, "labels": ["alert"]}).encode(),
+            data=json.dumps({"title": title, "body": body, "labels": [label]}).encode(),
             headers=hdrs, method="POST")
         with urllib.request.urlopen(req, timeout=20) as r:
             ok = r.status in (200, 201)

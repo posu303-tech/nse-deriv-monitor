@@ -1,5 +1,9 @@
 {
   "default_cooldown_days": 5,
+  "weekly_digest": {
+    "deliver_telegram": true,
+    "deliver_github_issue": true
+  },
   "rules": [
     {
       "name": "fii_futures_shift",

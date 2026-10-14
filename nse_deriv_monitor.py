@@ -53,7 +53,7 @@ IST = timezone(timedelta(hours=5, minutes=30))
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 RISK_FREE = 0.065
 
 PARTICIPANTS = ["Client", "DII", "FII", "Pro"]
@@ -253,6 +253,15 @@ CREATE TABLE IF NOT EXISTS iv_snapshot (
     fetched_at TEXT,
     PRIMARY KEY (date, symbol)
 );
+
+CREATE TABLE IF NOT EXISTS fut_snapshot (
+    date TEXT NOT NULL,
+    symbol TEXT NOT NULL,
+    expiry TEXT NOT NULL,
+    settle REAL, oi REAL, oi_chg REAL, vol REAL,
+    fetched_at TEXT,
+    PRIMARY KEY (date, symbol, expiry)
+);
 """
 
 
@@ -264,8 +273,9 @@ def open_db(path):
         row = cur.fetchone()
         ver = int(row[0]) if row else 0
         if ver < SCHEMA_VERSION:
-            # iv_snapshot columns changed during development: rebuild it.
-            conn.execute("DROP TABLE IF EXISTS iv_snapshot")
+            if ver < 2:
+                # iv_snapshot columns changed in v2: rebuild it.
+                conn.execute("DROP TABLE IF EXISTS iv_snapshot")
             conn.executescript(DB_SCHEMA)
             conn.execute("INSERT OR REPLACE INTO meta VALUES ('schema_version', ?)",
                          (str(SCHEMA_VERSION),))
@@ -434,7 +444,12 @@ def bhavcopy_option_data(rows, trade_dt, symbol):
         except ValueError:
             continue
         if ftp in ("IDF", "STF"):
-            futures[exp] = to_float(r.get("SttlmPric"))
+            futures[exp] = {
+                "settle": to_float(r.get("SttlmPric")),
+                "oi": to_float(r.get("OpnIntrst")) or 0.0,
+                "oi_chg": to_float(r.get("ChngInOpnIntrst")) or 0.0,
+                "vol": to_float(r.get("TtlTradgVol")) or 0.0,
+            }
             if underlying is None:
                 underlying = to_float(r.get("UndrlygPric"))
         elif ftp in ("IDO", "STO") and exp_d > trade_dt:
@@ -512,8 +527,73 @@ def metrics_from_strikes(strikes, spot, forward, T):
     }
 
 
-def snapshot_from_bhavcopy(conn, rows, trade_dt, symbol, verbose=True):
-    data = bhavcopy_option_data(rows, trade_dt, symbol)
+def store_futures(conn, data, trade_dt, symbol):
+    """Persist futures contracts (settle, OI) for rollover analytics."""
+    futures = (data or {}).get("futures") or {}
+    if not futures:
+        return 0
+    now = datetime.now(IST).isoformat(timespec="seconds")
+    date_iso = trade_dt.isoformat() if hasattr(trade_dt, "isoformat") else str(trade_dt)
+    with conn:
+        for exp, d in futures.items():
+            conn.execute(
+                "INSERT OR REPLACE INTO fut_snapshot VALUES (?,?,?,?,?,?,?,?)",
+                (date_iso, symbol, exp, d.get("settle"), d.get("oi"), d.get("oi_chg"),
+                 d.get("vol"), now))
+    return len(futures)
+
+
+def fetch_bhavcopy_by_date(day):
+    """Fetch one specific day's bhavcopy rows; None if absent (holiday/weekend)."""
+    ds = day.strftime("%Y%m%d")
+    url = (f"https://archives.nseindia.com/content/fo/"
+           f"BhavCopy_NSE_FO_0_0_0_{ds}_F_0000.csv.zip")
+    try:
+        raw = http_get(url, retries=1, timeout=60)
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None
+        return None
+    except Exception:  # noqa: BLE001
+        return None
+    try:
+        zf = zipfile.ZipFile(io.BytesIO(raw))
+        with zf.open(zf.namelist()[0]) as fh:
+            return list(csv.DictReader(io.TextIOWrapper(fh, encoding="utf-8")))
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def backfill_futures(conn, days, symbols, verbose=True):
+    """Backfill futures settle/OI from past bhavcopies (for rollover context)."""
+    today = datetime.now(IST).date()
+    n_days, n_rows = 0, 0
+    for i in range(1, days + 1):
+        day = today - timedelta(days=i)
+        if day.weekday() >= 5:
+            continue
+        have = conn.execute("SELECT COUNT(*) FROM fut_snapshot WHERE date=?",
+                            (day.isoformat(),)).fetchone()[0]
+        if have:
+            continue
+        rows = fetch_bhavcopy_by_date(day)
+        if not rows:
+            continue
+        day_rows = 0
+        for sym in symbols:
+            data = bhavcopy_option_data(rows, day, sym)
+            day_rows += store_futures(conn, data, day, sym)
+        if day_rows:
+            n_days += 1
+            n_rows += day_rows
+            if verbose:
+                print(f"    futures {day}: {day_rows} contract rows")
+        time.sleep(0.3)
+    return n_days, n_rows
+
+
+def snapshot_from_bhavcopy(conn, rows, trade_dt, symbol, data=None, verbose=True):
+    data = data or bhavcopy_option_data(rows, trade_dt, symbol)
     options, futures, underlying = data["options"], data["futures"], data["underlying"]
     if not options or not underlying:
         if verbose:
@@ -526,19 +606,20 @@ def snapshot_from_bhavcopy(conn, rows, trade_dt, symbol, verbose=True):
     term, atoms = {}, []
     fut_ref_exp = min(futures, key=lambda e: abs(parse_ymd(e) - trade_dt)) if futures else None
     fut_spot_basis = None
-    if fut_ref_exp and futures.get(fut_ref_exp):
-        fut_spot_basis = {"close": round(futures[fut_ref_exp] - underlying, 2),
+    if fut_ref_exp and futures.get(fut_ref_exp, {}).get("settle") is not None:
+        fut_spot_basis = {"close": round(futures[fut_ref_exp]["settle"] - underlying, 2),
                           "expiry": fut_ref_exp}
     for exp in expiries:
         T = max((parse_ymd(exp) - trade_dt).days, 1) / 365.0
-        fut = futures.get(exp)
+        fut_d = futures.get(exp) or {}
+        fut = fut_d.get("settle")
         forward = fut if fut else underlying * math.exp(RISK_FREE * T)
         m = metrics_from_strikes(options[exp], underlying, forward, T)
         if not m:
             continue
         m["expiry"] = exp
         m["forward"] = forward
-        m["basis"] = fut_spot_basis if (fut_spot_basis and futures.get(exp)) else None
+        m["basis"] = fut_spot_basis if (fut_spot_basis and fut) else None
         if m["atm_iv"]:
             term[exp] = m["atm_iv"]
         atoms.append(m)
@@ -1214,6 +1295,7 @@ th{color:#9fb3d1} td:first-child,th:first-child{text-align:left}
                               f"{fmt(rv.get('rv10'))}% / {fmt(rv.get('rv21'))}%", "10d / 21d"))
         parts.append("</div>")
     parts.append("<p class='muted'><a href='trends.html'>Trends dashboard</a> &middot; "
+                 "<a href='weekly.html'>Weekly digest</a> &middot; "
                  "<a href='latest.json'>latest.json</a> &middot; "
                  "<a href='https://github.com/posu303-tech/nse-deriv-monitor/blob/main/GUIDE.md'>How to read this report</a> &middot; "
                  "Sources: NSE participant-wise OI archive, NSE F&amp;O bhavcopy, "
@@ -1240,6 +1322,8 @@ def main():
                     help="calendar days to probe for participant OI files")
     ap.add_argument("--backfill", type=int, default=0, metavar="N",
                     help="fetch an initial N days of participant OI history (one-off seeding)")
+    ap.add_argument("--backfill-fut", type=int, default=0, metavar="N",
+                    help="backfill N days of futures settle/OI history (for rollover context)")
     ap.add_argument("--no-fetch", action="store_true",
                     help="render from local DB only (no network)")
     args = ap.parse_args()
@@ -1249,6 +1333,10 @@ def main():
     conn = open_db(os.path.join(args.data_dir, "nse_monitor.db"))
 
     if not args.no_fetch:
+        if args.backfill_fut > 0:
+            print(f"[0/4] Futures history backfill ({args.backfill_fut} calendar days)...")
+            nd, nr = backfill_futures(conn, args.backfill_fut, args.symbols)
+            print(f"      -> {nd} day(s), {nr} contract rows stored")
         print("[1/4] Participant-wise OI (NSE archives)...")
         if args.backfill > 0:
             n = fetch_participant_history(conn, days=args.backfill,
@@ -1262,13 +1350,17 @@ def main():
         bhav_rows, bhav_dt = fetch_bhavcopy()
         live_ok = True
         for sym in args.symbols:
+            data = None
+            if bhav_rows:
+                data = bhavcopy_option_data(bhav_rows, bhav_dt, sym)
+                store_futures(conn, data, bhav_dt, sym)
             got = None
             if live_ok:
                 got = fetch_live_chain_snapshot(conn, sym)
                 if not got:
                     live_ok = False  # throttled: use bhavcopy for all remaining symbols
-            if not got and bhav_rows:
-                snapshot_from_bhavcopy(conn, bhav_rows, bhav_dt, sym)
+            if not got and data:
+                snapshot_from_bhavcopy(conn, bhav_rows, bhav_dt, sym, data=data)
         print("[4/4] Vol context (India VIX / realized vol caches)...")
     else:
         print("[no-fetch] rendering from local DB")

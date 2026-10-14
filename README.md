@@ -90,6 +90,35 @@ or locally: `python send_alerts.py --test` (dry run: `--dry-run`).
 
 The published copy lives at the dashboard URL + `/trends.html`.
 
+## Weekly digest (Fridays)
+
+`weekly_digest.py` runs automatically on the Friday evening workflow run (and can be
+forced any day) and produces `output/weekly_YYYYMMDD.html` + `output/weekly.html`:
+
+- **Positioning**: 5-session changes in every participant's net index futures and PCR
+- **Cash**: 5-day cumulative FII/DII flows
+- **Volatility**: India VIX change / week range / rank; per-symbol IV + PCR changes
+- **Rollover context** (from daily futures settle + OI):
+  - **Roll %** = next-month OI ÷ (near + next OI) — positions carried forward
+  - **Roll spread** = next − near settle (positive = carry premium) and its weekly change
+  - 5-session near/next OI changes and rule-based notes ("roll-in accelerating",
+    "positions carried to next month", "net unwinding", thin-contract warnings)
+
+**Delivery** is controlled by `alerts_config.json` → `"weekly_digest"`:
+- `deliver_github_issue: true` (default) → opens a Friday issue labeled `digest`
+  (GitHub emails you — a ready-made weekly email digest)
+- `deliver_telegram: true` (default, if secrets set) → sends the text digest to Telegram
+
+Manual run (any day):
+```
+gh workflow run monitor.yml -R posu303-tech/nse-deriv-monitor -f force_weekly=true
+```
+
+Rollover history is seeded from bhavcopies and extends daily. To backfill more:
+```
+gh workflow run monitor.yml -R posu303-tech/nse-deriv-monitor -f fut_backfill_days=60
+```
+
 ## How the data pipeline works
 
 ```

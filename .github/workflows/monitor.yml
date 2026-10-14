@@ -10,6 +10,15 @@ on:
         description: "One-off: fetch this many calendar days of participant OI history (0 = normal run)"
         required: false
         default: "0"
+      fut_backfill_days:
+        description: "One-off: backfill this many days of futures settle/OI history (rollover context)"
+        required: false
+        default: "0"
+      force_weekly:
+        description: "Force the weekly digest now (normally auto-runs only on Fridays)"
+        type: boolean
+        required: false
+        default: false
       test_alert:
         description: "Send a test alert through the configured channels (Telegram / GitHub issue)"
         type: boolean
@@ -47,15 +56,29 @@ jobs:
         if: ${{ !inputs.skip_connectivity_test }}
         run: python test_connectivity.py
 
-      - name: Refresh history (if requested)
+      - name: Refresh participant OI history (if requested)
         if: ${{ inputs.backfill_days != '' && inputs.backfill_days != '0' }}
         run: python nse_deriv_monitor.py --backfill ${{ inputs.backfill_days }}
+
+      - name: Refresh futures history (if requested)
+        if: ${{ inputs.fut_backfill_days != '' && inputs.fut_backfill_days != '0' }}
+        run: python nse_deriv_monitor.py --backfill-fut ${{ inputs.fut_backfill_days }}
 
       - name: Run monitor
         run: python nse_deriv_monitor.py 2>&1 | tee monitor_run.log
 
       - name: Build trends dashboard
         run: python make_trends.py 2>&1 | tee -a monitor_run.log
+
+      - name: Weekly digest (Fridays)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FLAGS=""
+          if [ "${{ inputs.force_weekly }}" = "true" ]; then FLAGS="$FLAGS --force"; fi
+          python weekly_digest.py $FLAGS 2>&1 | tee -a monitor_run.log
 
       - name: Send alerts (if triggered)
         env:
@@ -87,6 +110,13 @@ jobs:
           cp "$GITHUB_WORKSPACE/$REPORT" index.html
           cp "$GITHUB_WORKSPACE/$REPORT_JSON" latest.json
           cp "$GITHUB_WORKSPACE/output/trends.html" trends.html
+          if [ -f "$GITHUB_WORKSPACE/output/weekly.html" ]; then
+            cp "$GITHUB_WORKSPACE/output/weekly.html" weekly.html
+          fi
+          WEEKLY=$(ls -t "$GITHUB_WORKSPACE"/output/weekly_2*.html 2>/dev/null | head -1 || true)
+          if [ -n "$WEEKLY" ]; then
+            cp "$WEEKLY" "$(basename "$WEEKLY")"
+          fi
           git add -A
           git commit -m "report ${STAMP}"
           git push "$REPO_URL" gh-pages --force
