@@ -14,7 +14,7 @@
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  14-Oct-2026 18:43 IST
+  NSE DERIVATIVES MONITOR  |  14-Oct-2026 18:58 IST
 ==========================================================================
 
 WHAT CHANGED (since previous session)
@@ -88,43 +88,56 @@ L2 VOL / L3 MICROSTRUCTURE - RELIANCE
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1843.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1843.html
-trends.html written: 3 panels, 752 date points, 51 KB
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1858.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1858.html
+weekly digest: not Friday in IST (Wednesday) - skipping (use --force to generate)
+NSE MONTHLY ROLLOVER SPECIAL - 2026-10-14
+Headline: Monthly rollover into 2026-10-27 - 13 calendar days left; NIFTY roll 12% (5s ago 11%); prev cycle closed 60%
+
+CURRENT STATE (data 2026-10-13, expiry 2026-10-27)
+  NIFTY       roll 12% (5s 11%) | spread +102.7pts (+0.45%) | 5s nearOI -239,460, nextOI +114,855 | positions carried to next month
+  BANKNIFTY   roll 8% (5s 7%) | spread +278.2pts (+0.50%) | 5s nearOI -34,020, nextOI +25,230 | positions carried to next month; carry premium narrowed
+  FINNIFTY    roll 1% (5s 1%) | spread -455.1pts (-1.79%) | 5s nearOI -2,940, nextOI +0 | net unwinding; next-month OI thin (spread unreliable)
+  MIDCPNIFTY  roll 5% (5s 4%) | spread +51.6pts (+0.37%) | 5s nearOI +75,960, nextOI +24,960 | steady
+  HDFCBANK    roll 10% (5s 8%) | spread +3.8pts (+0.52%) | 5s nearOI -28,647,450, nextOI +6,299,150 | roll-in accelerating; positions carried to next month
+  RELIANCE    roll 14% (5s 11%) | spread +6.0pts (+0.51%) | 5s nearOI +1,237,500, nextOI +6,478,500 | roll-in accelerating
+
+ROLL TRAJECTORY (roll %, last sessions)
+  session           NIFTY  BANKNIFTY   FINNIFTY  MIDCPNIFT   HDFCBANK   RELIANCE
+  2026-10-01          11%         6%         1%         4%         7%        10%
+  2026-10-05          11%         7%         1%         4%         7%        10%
+  2026-10-06          11%         7%         1%         4%         8%        11%
+  2026-10-07          11%         7%         1%         4%         8%        11%
+  2026-10-08          11%         7%         1%         4%         8%        11%
+  2026-10-09          11%         7%         1%         5%         9%        12%
+  2026-10-12          12%         8%         1%         5%         9%        13%
+  2026-10-13          12%         8%         1%         5%        10%        14%
+
+PREVIOUS CYCLE (2026-09-29)
+  NIFTY       final 60% (2026-09-28) | at T-13d 16% (2026-09-16)
+  BANKNIFTY   final 64% (2026-09-28) | at T-13d 13% (2026-09-16)
+  FINNIFTY    final 25% (2026-09-28) | at T-13d 0% (2026-09-16)
+  MIDCPNIFTY  final 67% (2026-09-28) | at T-13d 4% (2026-09-16)
+  HDFCBANK    final 82% (2026-09-28) | at T-13d 15% (2026-09-16)
+  RELIANCE    final 82% (2026-09-28) | at T-13d 14% (2026-09-16)
+
+POSITIONING (5s): FII net -289495 (+4,230); Client net 229857 (-7,243)
+VOL: India VIX 14.63 (+0.74), rank 71
+  NIFTY term: 2026-10-19:12.91 -> 2026-10-27:12.60
+  BANKNIFTY term: 2026-10-27:14.08 -> 2026-11-23:13.34
+  FINNIFTY term: 2026-10-27:16.89 -> 2026-11-23:17.99
+  MIDCPNIFTY term: 2026-10-27:17.35 -> 2026-11-23:18.31
+  HDFCBANK term: 2026-10-27:22.55 -> 2026-11-23:21.57
+  RELIANCE term: 2026-10-27:24.04 -> 2026-11-23:23.64
+
+Full page: https://posu303-tech.github.io/nse-deriv-monitor/rollover.html
+
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/rollover_20261014.html
+(forced run outside the expiry window: not touching delivery state)
+trends.html written: 3 panels, 752 date points, 52 KB
+  archive: 1 weekly digests, 1 rollover specials
   - positioning: 246 points, 4 series
   - options_pcr: 246 points, 4 series
   - volatility: 260 points, 8 series
-NSE WEEKLY DIGEST - 2026-10-14
-Headline: FII covering; VIX 14.63 (+0.74); NIFTY roll 12% (prev 11%); BANKNIFTY roll 8% (prev 7%)
-
-POSITIONING (5 sessions: 2026-10-06 -> 2026-10-13)
-  Client  net     229857 (-7,243)   PCR 1.17 (+0.12)
-  DII     net      34531 (+630)   PCR 0.76 (-0.91)
-  FII     net    -289495 (+4,230)   PCR 1.15 (+0.02)
-  Pro     net      25107 (+2,383)   PCR 1.06 (+0.18)
-
-CASH (cumulative, 2 sessions): FII -3,162.6 cr | DII +5,109.7 cr
-
-VOLATILITY: India VIX 14.63 (+0.74), week range 14.12-15.28, 1y rank 71
-  NIFTY       IV 12.91% | PCR 1.39
-  BANKNIFTY   IV 14.08% | PCR 1.07
-  FINNIFTY    IV 16.89% | PCR 0.81
-  MIDCPNIFTY  IV 17.35% | PCR 0.96
-  HDFCBANK    IV 22.55% | PCR 0.56
-  RELIANCE    IV 24.04% | PCR 0.60
-
-ROLLOVER (futures, near -> next month)
-  NIFTY       2026-10-27 in 14d | roll 12% (prev 11%) | spread +102.7pts (+0.45%) | positions carried to next month
-  BANKNIFTY   2026-10-27 in 14d | roll 8% (prev 7%) | spread +278.2pts (+0.50%) | positions carried to next month; carry premium narrowed
-  FINNIFTY    2026-10-27 in 14d | roll 1% (prev 1%) | spread -455.1pts (-1.79%) | net unwinding; next-month OI thin (spread unreliable)
-  MIDCPNIFTY  2026-10-27 in 14d | roll 5% (prev 4%) | spread +51.6pts (+0.37%) | steady
-  HDFCBANK    2026-10-27 in 14d | roll 10% (prev 8%) | spread +3.8pts (+0.52%) | roll-in accelerating; positions carried to next month
-  RELIANCE    2026-10-27 in 14d | roll 14% (prev 11%) | spread +6.0pts (+0.51%) | roll-in accelerating
-
-Dashboard: https://posu303-tech.github.io/nse-deriv-monitor/
-
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/weekly_20261014.html
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/weekly_20261014.json
-  github issue: created https://api.github.com/repos/posu303-tech/nse-deriv-monitor/issues/3
-evaluating: monitor_20261014_1843.json
+evaluating: monitor_20261014_1858.json
 no alerts fired
