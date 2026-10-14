@@ -1296,6 +1296,7 @@ th{color:#9fb3d1} td:first-child,th:first-child{text-align:left}
         parts.append("</div>")
     parts.append("<p class='muted'><a href='trends.html'>Trends dashboard</a> &middot; "
                  "<a href='weekly.html'>Weekly digest</a> &middot; "
+                 "<a href='rollover.html'>Rollover special</a> &middot; "
                  "<a href='latest.json'>latest.json</a> &middot; "
                  "<a href='https://github.com/posu303-tech/nse-deriv-monitor/blob/main/GUIDE.md'>How to read this report</a> &middot; "
                  "Sources: NSE participant-wise OI archive, NSE F&amp;O bhavcopy, "

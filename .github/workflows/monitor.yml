@@ -19,6 +19,11 @@ on:
         type: boolean
         required: false
         default: false
+      force_rollover:
+        description: "Force the monthly rollover special now (normally only within 7 days of expiry)"
+        type: boolean
+        required: false
+        default: false
       test_alert:
         description: "Send a test alert through the configured channels (Telegram / GitHub issue)"
         type: boolean
@@ -67,9 +72,6 @@ jobs:
       - name: Run monitor
         run: python nse_deriv_monitor.py 2>&1 | tee monitor_run.log
 
-      - name: Build trends dashboard
-        run: python make_trends.py 2>&1 | tee -a monitor_run.log
-
       - name: Weekly digest (Fridays)
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -79,6 +81,19 @@ jobs:
           FLAGS=""
           if [ "${{ inputs.force_weekly }}" = "true" ]; then FLAGS="$FLAGS --force"; fi
           python weekly_digest.py $FLAGS 2>&1 | tee -a monitor_run.log
+
+      - name: Monthly rollover special (near expiry)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FLAGS=""
+          if [ "${{ inputs.force_rollover }}" = "true" ]; then FLAGS="$FLAGS --force"; fi
+          python rollover_special.py $FLAGS 2>&1 | tee -a monitor_run.log
+
+      - name: Build trends dashboard
+        run: python make_trends.py 2>&1 | tee -a monitor_run.log
 
       - name: Send alerts (if triggered)
         env:
@@ -113,10 +128,16 @@ jobs:
           if [ -f "$GITHUB_WORKSPACE/output/weekly.html" ]; then
             cp "$GITHUB_WORKSPACE/output/weekly.html" weekly.html
           fi
-          WEEKLY=$(ls -t "$GITHUB_WORKSPACE"/output/weekly_2*.html 2>/dev/null | head -1 || true)
-          if [ -n "$WEEKLY" ]; then
-            cp "$WEEKLY" "$(basename "$WEEKLY")"
+          if [ -f "$GITHUB_WORKSPACE/output/rollover.html" ]; then
+            cp "$GITHUB_WORKSPACE/output/rollover.html" rollover.html
           fi
+          # dated archive pages (weekly digests + rollover specials)
+          for f in "$GITHUB_WORKSPACE"/output/weekly_2*.html; do
+            if [ -e "$f" ]; then cp "$f" "$(basename "$f")"; fi
+          done
+          for f in "$GITHUB_WORKSPACE"/output/rollover_2*.html; do
+            if [ -e "$f" ]; then cp "$f" "$(basename "$f")"; fi
+          done
           git add -A
           git commit -m "report ${STAMP}"
           git push "$REPO_URL" gh-pages --force

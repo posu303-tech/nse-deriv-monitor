@@ -4,6 +4,11 @@
     "deliver_telegram": true,
     "deliver_github_issue": true
   },
+  "rollover_special": {
+    "deliver": true,
+    "deliver_telegram": true,
+    "deliver_github_issue": true
+  },
   "rules": [
     {
       "name": "fii_futures_shift",

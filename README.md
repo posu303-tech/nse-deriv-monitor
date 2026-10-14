@@ -87,8 +87,34 @@ or locally: `python send_alerts.py --test` (dry run: `--dry-run`).
 2. **Participant option positioning PCR** over time
 3. **Volatility**: India VIX vs NIFTY realized vol (21d), plus ATM IV snapshots
    for every tracked symbol (dots accumulate with each run)
+4. **Download archive**: every weekly digest and rollover special, dated and linked
+   (files are copied to the published site on each run)
 
 The published copy lives at the dashboard URL + `/trends.html`.
+
+## Monthly rollover special (expiry week)
+
+`rollover_special.py` activates automatically within **7 calendar days of the monthly
+futures expiry** (and regenerates on every run inside the window, so the page tracks
+the roll daily). It produces `output/rollover.html` + dated copies:
+
+- **Current state per symbol**: roll %, 5-session roll change, carry spread (pts and %),
+  5-session near/next OI changes, rule-based notes
+- **Roll trajectory**: roll % by session for the last ~10 sessions (the classic
+  month-end acceleration curve)
+- **Previous cycle comparison**: last month's *final* roll % and its roll % at the
+  same days-to-expiry — e.g. "NIFTY at T-13: 12% now vs 16% last cycle"
+- **Positioning into expiry** (participant 5-session changes) and **vol into expiry**
+  (India VIX rank, ATM IV term structure per symbol)
+
+**Delivery** (per `alerts_config.json` → `"rollover_special"`) fires twice per cycle:
+when the window opens ("X days to expiry") and on the last session ("final roll").
+GitHub issue labeled `rollover` (emails you) + Telegram if secrets are set.
+
+Manual run (any day):
+```
+gh workflow run monitor.yml -R posu303-tech/nse-deriv-monitor -f force_rollover=true
+```
 
 ## Weekly digest (Fridays)
 

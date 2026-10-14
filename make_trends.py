@@ -18,6 +18,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sqlite3
 import statistics
 import sys
@@ -93,7 +94,7 @@ def aligned(dates, values_map):
     return [values_map.get(d) for d in dates]
 
 
-def build_payload(data_dir):
+def build_payload(data_dir, out_dir=None):
     db = os.path.join(data_dir, "nse_monitor.db")
     p_dates, net, pcr = participant_series(db)
     ivs = iv_series(db)
@@ -167,7 +168,29 @@ def build_payload(data_dir):
     return {
         "generated_at": datetime.now(IST).isoformat(timespec="seconds"),
         "panels": panels,
+        "archive": scan_archive(out_dir) if out_dir else {"weekly": [], "rollover": []},
     }
+
+
+def scan_archive(out_dir):
+    """List dated digest/rollover pages for the download archive."""
+    def _list(prefix):
+        items = []
+        if not out_dir or not os.path.isdir(out_dir):
+            return items
+        pat = re.compile(rf"^{prefix}_(\d{{8}})\.html$")
+        for name in os.listdir(out_dir):
+            m = pat.match(name)
+            if m:
+                try:
+                    label = datetime.strptime(m.group(1), "%Y%m%d").strftime("%d-%b-%Y")
+                except ValueError:
+                    label = m.group(1)
+                items.append({"file": name, "label": label})
+        items.sort(key=lambda x: x["file"], reverse=True)
+        return items
+
+    return {"weekly": _list("weekly"), "rollover": _list("rollover")}
 
 
 # ------------------------------------------------------------------ html
@@ -199,6 +222,11 @@ a{color:#6ea8fe}
 .trow b{color:#fff}
 .tdate{color:#8ea3c4;font-size:11px;margin-bottom:2px}
 .empty{color:#7d8fa9;padding:30px;text-align:center}
+.archive{padding:4px 0 10px}
+.archive a{display:inline-block;margin:0 16px 10px 0;color:#6ea8fe;text-decoration:none;
+           border:1px solid #26314a;border-radius:8px;padding:6px 12px;font-size:13px}
+.archive a:hover{border-color:#6ea8fe}
+.archive a.latest{border-color:#53d769;color:#53d769}
 </style></head>
 <body>
 <h1>NSE Derivatives Monitor - Trends</h1>
@@ -209,6 +237,7 @@ a{color:#6ea8fe}
   <a href="https://github.com/__REPO__">source</a>
 </div>
 <div id="charts"></div>
+__ARCHIVE__
 <p class="muted">Sources: NSE participant-wise OI archive, NSE option chain /
 bhavcopy, Yahoo Finance. Educational tool, not investment advice.</p>
 <script>
@@ -400,7 +429,30 @@ window.addEventListener("resize", () => {
 def render_html(payload, repo="posu303-tech/nse-deriv-monitor"):
     data_js = json.dumps(payload, ensure_ascii=False)
     html = HTML_TEMPLATE.replace("__DATA__", data_js).replace("__REPO__", repo)
-    return html
+    return html.replace("__ARCHIVE__", render_archive(payload.get("archive")))
+
+
+def render_archive(archive):
+    """Static download-archive section (weekly digests + rollover specials)."""
+    if not archive:
+        return ""
+    sections = []
+    weekly = (archive.get("weekly") or [])
+    roll = (archive.get("rollover") or [])
+    if weekly:
+        links = ['<a class="latest" href="weekly.html">latest</a>']
+        links += [f'<a href="{e["file"]}">{e["label"]}</a>' for e in weekly]
+        sections.append(('<div class="panel"><div class="ptitle">Weekly digests</div>'
+                         '<div class="psub">Friday 5-session changes &amp; rollover context '
+                         '(every Friday evening)</div>'
+                         f'<div class="archive">{"".join(links)}</div></div>'))
+    if roll:
+        links = ['<a class="latest" href="rollover.html">latest</a>']
+        links += [f'<a href="{e["file"]}">{e["label"]}</a>' for e in roll]
+        sections.append(('<div class="panel"><div class="ptitle">Monthly rollover specials</div>'
+                         '<div class="psub">Expiry-week roll %, carry spreads, cycle comparisons</div>'
+                         f'<div class="archive">{"".join(links)}</div></div>'))
+    return "".join(sections)
 
 
 def main():
@@ -418,7 +470,7 @@ def main():
         print(f"no database at {args.data_dir}; run nse_deriv_monitor.py first")
         return 1
 
-    payload = build_payload(args.data_dir)
+    payload = build_payload(args.data_dir, args.out_dir)
     os.makedirs(args.out_dir, exist_ok=True)
     out = os.path.join(args.out_dir, "trends.html")
     with open(out, "w", encoding="utf-8") as fh:
@@ -428,6 +480,9 @@ def main():
     n_points = sum(len(p["dates"]) for p in payload["panels"])
     size_kb = os.path.getsize(out) / 1024
     print(f"trends.html written: {n_panels} panels, {n_points} date points, {size_kb:.0f} KB")
+    arc = payload.get("archive") or {}
+    print(f"  archive: {len(arc.get('weekly') or [])} weekly digests, "
+          f"{len(arc.get('rollover') or [])} rollover specials")
     for p in payload["panels"]:
         print(f"  - {p['id']}: {len(p['dates'])} points, {len(p['series'])} series")
     return 0

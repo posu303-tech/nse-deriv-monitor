@@ -1,0 +1,1111 @@
+{
+  "date": "2026-10-14",
+  "generated_at": "2026-10-14T18:56:11+05:30",
+  "anchor_expiry": "2026-10-27",
+  "days_to_expiry": 13,
+  "prev_expiry": "2026-09-29",
+  "last_data_date": "2026-10-13",
+  "current": {
+    "NIFTY": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 18447455.0,
+      "next_oi": 2457130.0,
+      "near_settle": 22834.8,
+      "next_settle": 22937.5,
+      "roll_pct": 11.75402429658374,
+      "spread": 102.70000000000073,
+      "spread_pct": 0.4497521327097269,
+      "near_oi_chg": -239460.0,
+      "next_oi_chg": 114855.0,
+      "roll_pct_prev": 11.138208366560956,
+      "spread_prev": 96.0,
+      "thin_next": false,
+      "note": "positions carried to next month"
+    },
+    "BANKNIFTY": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 2253180.0,
+      "next_oi": 186330.0,
+      "near_settle": 55778.2,
+      "next_settle": 56056.4,
+      "roll_pct": 7.638009272353874,
+      "spread": 278.20000000000437,
+      "spread_pct": 0.4987611647561312,
+      "near_oi_chg": -34020.0,
+      "next_oi_chg": 25230.0,
+      "roll_pct_prev": 6.580075971081975,
+      "spread_prev": 288.59999999999854,
+      "thin_next": false,
+      "note": "positions carried to next month; carry premium narrowed"
+    },
+    "FINNIFTY": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 23760.0,
+      "next_oi": 240.0,
+      "near_settle": 25355.1,
+      "next_settle": 24900.0,
+      "roll_pct": 1.0,
+      "spread": -455.09999999999854,
+      "spread_pct": -1.7949051670078153,
+      "near_oi_chg": -2940.0,
+      "next_oi_chg": 0.0,
+      "roll_pct_prev": 0.8908685968819599,
+      "spread_prev": 131.73999999999796,
+      "thin_next": true,
+      "note": "net unwinding; next-month OI thin (spread unreliable)"
+    },
+    "MIDCPNIFTY": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 2057280.0,
+      "next_oi": 105720.0,
+      "near_settle": 13802.65,
+      "next_settle": 13854.2,
+      "roll_pct": 4.887656033287102,
+      "spread": 51.55000000000109,
+      "spread_pct": 0.3734790058430888,
+      "near_oi_chg": 75960.0,
+      "next_oi_chg": 24960.0,
+      "roll_pct_prev": 3.916433891992551,
+      "spread_prev": 52.25,
+      "thin_next": false,
+      "note": "steady"
+    },
+    "HDFCBANK": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 323163750.0,
+      "next_oi": 34874450.0,
+      "near_settle": 718.9,
+      "next_settle": 722.65,
+      "roll_pct": 9.740427138780165,
+      "spread": 3.75,
+      "spread_pct": 0.5216302684657115,
+      "near_oi_chg": -28647450.0,
+      "next_oi_chg": 6299150.0,
+      "roll_pct_prev": 7.512175116624801,
+      "spread_prev": 3.449999999999932,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month"
+    },
+    "RELIANCE": {
+      "date": "2026-10-13",
+      "near_expiry": "2026-10-27",
+      "next_expiry": "2026-11-23",
+      "days_to_expiry": 14,
+      "near_oi": 144897000.0,
+      "next_oi": 23717500.0,
+      "near_settle": 1174.3,
+      "next_settle": 1180.3,
+      "roll_pct": 14.066109379679684,
+      "spread": 6.0,
+      "spread_pct": 0.5109426892616878,
+      "near_oi_chg": 1237500.0,
+      "next_oi_chg": 6478500.0,
+      "roll_pct_prev": 10.714208025556484,
+      "spread_prev": 6.400000000000091,
+      "thin_next": false,
+      "note": "roll-in accelerating"
+    }
+  },
+  "trajectories": {
+    "NIFTY": [
+      {
+        "date": "2026-09-29",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 28,
+        "near_oi": 17135235.0,
+        "next_oi": 1999465.0,
+        "near_settle": 22865.7,
+        "next_settle": 22979.3,
+        "roll_pct": 10.449419118146613,
+        "spread": 113.59999999999854
+      },
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 18015075.0,
+        "next_oi": 2116335.0,
+        "near_settle": 22707.3,
+        "next_settle": 22828.3,
+        "roll_pct": 10.512601948894787,
+        "spread": 121.0
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 19155955.0,
+        "next_oi": 2252640.0,
+        "near_settle": 22530.3,
+        "next_settle": 22638.0,
+        "roll_pct": 10.522129079465515,
+        "spread": 107.70000000000073
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 19015620.0,
+        "next_oi": 2307370.0,
+        "near_settle": 22620.8,
+        "next_settle": 22722.8,
+        "roll_pct": 10.821043390256245,
+        "spread": 102.0
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 18686915.0,
+        "next_oi": 2342275.0,
+        "near_settle": 22795.4,
+        "next_settle": 22891.4,
+        "roll_pct": 11.138208366560956,
+        "spread": 96.0
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 19023355.0,
+        "next_oi": 2375425.0,
+        "near_settle": 22632.9,
+        "next_settle": 22737.5,
+        "roll_pct": 11.100749668906358,
+        "spread": 104.59999999999854
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 19137105.0,
+        "next_oi": 2449460.0,
+        "near_settle": 22293.2,
+        "next_settle": 22395.8,
+        "roll_pct": 11.347150415084567,
+        "spread": 102.59999999999854
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 18942950.0,
+        "next_oi": 2459795.0,
+        "near_settle": 22612.6,
+        "next_settle": 22711.6,
+        "roll_pct": 11.492894953427703,
+        "spread": 99.0
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 18703750.0,
+        "next_oi": 2476955.0,
+        "near_settle": 22386.5,
+        "next_settle": 22493.2,
+        "roll_pct": 11.694393553000243,
+        "spread": 106.70000000000073
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 18447455.0,
+        "next_oi": 2457130.0,
+        "near_settle": 22834.8,
+        "next_settle": 22937.5,
+        "roll_pct": 11.75402429658374,
+        "spread": 102.70000000000073
+      }
+    ],
+    "BANKNIFTY": [
+      {
+        "date": "2026-09-29",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 28,
+        "near_oi": 2260320.0,
+        "next_oi": 159360.0,
+        "near_settle": 54897.4,
+        "next_settle": 55213.6,
+        "roll_pct": 6.5859948422931955,
+        "spread": 316.1999999999971
+      },
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 2394960.0,
+        "next_oi": 159180.0,
+        "near_settle": 55006.0,
+        "next_settle": 55284.8,
+        "roll_pct": 6.232234724799737,
+        "spread": 278.8000000000029
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 2346180.0,
+        "next_oi": 162510.0,
+        "near_settle": 54794.8,
+        "next_settle": 55091.8,
+        "roll_pct": 6.477882879112205,
+        "spread": 297.0
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 2300730.0,
+        "next_oi": 162960.0,
+        "near_settle": 54923.0,
+        "next_settle": 55228.0,
+        "roll_pct": 6.614468541090803,
+        "spread": 305.0
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 2287200.0,
+        "next_oi": 161100.0,
+        "near_settle": 55247.4,
+        "next_settle": 55536.0,
+        "roll_pct": 6.580075971081975,
+        "spread": 288.59999999999854
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 2388810.0,
+        "next_oi": 166710.0,
+        "near_settle": 55249.6,
+        "next_settle": 55551.2,
+        "roll_pct": 6.52352554470323,
+        "spread": 301.59999999999854
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 2315880.0,
+        "next_oi": 171930.0,
+        "near_settle": 54738.8,
+        "next_settle": 55030.4,
+        "roll_pct": 6.910897536387425,
+        "spread": 291.59999999999854
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 2343780.0,
+        "next_oi": 172290.0,
+        "near_settle": 55479.6,
+        "next_settle": 55750.8,
+        "roll_pct": 6.847583731772168,
+        "spread": 271.20000000000437
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 2294310.0,
+        "next_oi": 186630.0,
+        "near_settle": 55016.8,
+        "next_settle": 55319.8,
+        "roll_pct": 7.522551935959758,
+        "spread": 303.0
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 2253180.0,
+        "next_oi": 186330.0,
+        "near_settle": 55778.2,
+        "next_settle": 56056.4,
+        "roll_pct": 7.638009272353874,
+        "spread": 278.20000000000437
+      }
+    ],
+    "FINNIFTY": [
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 25860.0,
+        "next_oi": 180.0,
+        "near_settle": 24794.8,
+        "next_settle": 25001.4,
+        "roll_pct": 0.6912442396313364,
+        "spread": 206.60000000000218
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 27360.0,
+        "next_oi": 240.0,
+        "near_settle": 24700.3,
+        "next_settle": 24880.3,
+        "roll_pct": 0.8695652173913043,
+        "spread": 180.0
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 27000.0,
+        "next_oi": 240.0,
+        "near_settle": 24741.7,
+        "next_settle": 24839.14,
+        "roll_pct": 0.881057268722467,
+        "spread": 97.43999999999869
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 26700.0,
+        "next_oi": 240.0,
+        "near_settle": 24995.4,
+        "next_settle": 25127.14,
+        "roll_pct": 0.8908685968819599,
+        "spread": 131.73999999999796
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 24660.0,
+        "next_oi": 240.0,
+        "near_settle": 24985.6,
+        "next_settle": 25093.48,
+        "roll_pct": 0.9638554216867471,
+        "spread": 107.88000000000102
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 25260.0,
+        "next_oi": 240.0,
+        "near_settle": 24728.7,
+        "next_settle": 24819.67,
+        "roll_pct": 0.9411764705882352,
+        "spread": 90.96999999999753
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 25740.0,
+        "next_oi": 240.0,
+        "near_settle": 25077.4,
+        "next_settle": 25146.13,
+        "roll_pct": 0.9237875288683602,
+        "spread": 68.72999999999956
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 24600.0,
+        "next_oi": 240.0,
+        "near_settle": 24908.0,
+        "next_settle": 25031.41,
+        "roll_pct": 0.966183574879227,
+        "spread": 123.40999999999985
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 23760.0,
+        "next_oi": 240.0,
+        "near_settle": 25355.1,
+        "next_settle": 24900.0,
+        "roll_pct": 1.0,
+        "spread": -455.09999999999854
+      }
+    ],
+    "MIDCPNIFTY": [
+      {
+        "date": "2026-09-29",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 28,
+        "near_oi": 2049840.0,
+        "next_oi": 73320.0,
+        "near_settle": 13840.0,
+        "next_settle": 13899.8,
+        "roll_pct": 3.4533431300514326,
+        "spread": 59.79999999999927
+      },
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 2039520.0,
+        "next_oi": 75120.0,
+        "near_settle": 13797.8,
+        "next_settle": 13837.4,
+        "roll_pct": 3.55237770968108,
+        "spread": 39.600000000000364
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 2035800.0,
+        "next_oi": 77520.0,
+        "near_settle": 13616.5,
+        "next_settle": 13667.6,
+        "roll_pct": 3.668161944239396,
+        "spread": 51.100000000000364
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 2017200.0,
+        "next_oi": 78360.0,
+        "near_settle": 13668.95,
+        "next_settle": 13722.7,
+        "roll_pct": 3.7393345931397812,
+        "spread": 53.75
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 1981320.0,
+        "next_oi": 80760.0,
+        "near_settle": 13856.95,
+        "next_settle": 13909.2,
+        "roll_pct": 3.916433891992551,
+        "spread": 52.25
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 1988040.0,
+        "next_oi": 83640.0,
+        "near_settle": 13760.6,
+        "next_settle": 13809.75,
+        "roll_pct": 4.037303058387396,
+        "spread": 49.149999999999636
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 1990200.0,
+        "next_oi": 92280.0,
+        "near_settle": 13442.45,
+        "next_settle": 13478.7,
+        "roll_pct": 4.43125504206523,
+        "spread": 36.25
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 2033640.0,
+        "next_oi": 98160.0,
+        "near_settle": 13627.0,
+        "next_settle": 13683.45,
+        "roll_pct": 4.604559527160147,
+        "spread": 56.45000000000073
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 2114760.0,
+        "next_oi": 101280.0,
+        "near_settle": 13612.5,
+        "next_settle": 13665.55,
+        "roll_pct": 4.570314615259653,
+        "spread": 53.04999999999927
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 2057280.0,
+        "next_oi": 105720.0,
+        "near_settle": 13802.65,
+        "next_settle": 13854.2,
+        "roll_pct": 4.887656033287102,
+        "spread": 51.55000000000109
+      }
+    ],
+    "HDFCBANK": [
+      {
+        "date": "2026-09-29",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 28,
+        "near_oi": 365359800.0,
+        "next_oi": 24291800.0,
+        "near_settle": 722.1,
+        "next_settle": 726.05,
+        "roll_pct": 6.234235917419562,
+        "spread": 3.949999999999932
+      },
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 366590250.0,
+        "next_oi": 25799800.0,
+        "near_settle": 715.55,
+        "next_settle": 718.8,
+        "roll_pct": 6.575039300818153,
+        "spread": 3.25
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 361305100.0,
+        "next_oi": 25795250.0,
+        "near_settle": 723.0,
+        "next_settle": 726.6,
+        "roll_pct": 6.663711360632973,
+        "spread": 3.6000000000000227
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 355566900.0,
+        "next_oi": 27692600.0,
+        "near_settle": 706.2,
+        "next_settle": 709.5,
+        "roll_pct": 7.22554822515815,
+        "spread": 3.2999999999999545
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 351811200.0,
+        "next_oi": 28575300.0,
+        "near_settle": 711.7,
+        "next_settle": 715.15,
+        "roll_pct": 7.512175116624801,
+        "spread": 3.449999999999932
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 353403700.0,
+        "next_oi": 29802500.0,
+        "near_settle": 707.45,
+        "next_settle": 710.6,
+        "roll_pct": 7.777144524279618,
+        "spread": 3.1499999999999773
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 345846150.0,
+        "next_oi": 31437250.0,
+        "near_settle": 694.4,
+        "next_settle": 698.05,
+        "roll_pct": 8.33252934001337,
+        "spread": 3.6499999999999773
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 334497150.0,
+        "next_oi": 32501300.0,
+        "near_settle": 711.25,
+        "next_settle": 714.8,
+        "roll_pct": 8.8559774571255,
+        "spread": 3.5499999999999545
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 328737500.0,
+        "next_oi": 33543900.0,
+        "near_settle": 705.3,
+        "next_settle": 708.7,
+        "roll_pct": 9.259073195587739,
+        "spread": 3.400000000000091
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 323163750.0,
+        "next_oi": 34874450.0,
+        "near_settle": 718.9,
+        "next_settle": 722.65,
+        "roll_pct": 9.740427138780165,
+        "spread": 3.75
+      }
+    ],
+    "RELIANCE": [
+      {
+        "date": "2026-09-29",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 28,
+        "near_oi": 146382000.0,
+        "next_oi": 14746500.0,
+        "near_settle": 1195.8,
+        "next_settle": 1203.5,
+        "roll_pct": 9.15201221385416,
+        "spread": 7.7000000000000455
+      },
+      {
+        "date": "2026-09-30",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 27,
+        "near_oi": 145432000.0,
+        "next_oi": 15549500.0,
+        "near_settle": 1191.8,
+        "next_settle": 1197.7,
+        "roll_pct": 9.659184440448126,
+        "spread": 5.900000000000091
+      },
+      {
+        "date": "2026-10-01",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 26,
+        "near_oi": 146855000.0,
+        "next_oi": 16451500.0,
+        "near_settle": 1175.8,
+        "next_settle": 1182.5,
+        "roll_pct": 10.074001953382137,
+        "spread": 6.7000000000000455
+      },
+      {
+        "date": "2026-10-05",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 22,
+        "near_oi": 147644000.0,
+        "next_oi": 16734500.0,
+        "near_settle": 1194.0,
+        "next_settle": 1200.0,
+        "roll_pct": 10.180467640232756,
+        "spread": 6.0
+      },
+      {
+        "date": "2026-10-06",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 21,
+        "near_oi": 143659500.0,
+        "next_oi": 17239000.0,
+        "near_settle": 1219.5,
+        "next_settle": 1225.9,
+        "roll_pct": 10.714208025556484,
+        "spread": 6.400000000000091
+      },
+      {
+        "date": "2026-10-07",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 20,
+        "near_oi": 142401000.0,
+        "next_oi": 17455000.0,
+        "near_settle": 1210.2,
+        "next_settle": 1216.6,
+        "roll_pct": 10.919202282053849,
+        "spread": 6.399999999999864
+      },
+      {
+        "date": "2026-10-08",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 19,
+        "near_oi": 142554500.0,
+        "next_oi": 18408000.0,
+        "near_settle": 1181.7,
+        "next_settle": 1187.4,
+        "roll_pct": 11.43620408480236,
+        "spread": 5.7000000000000455
+      },
+      {
+        "date": "2026-10-09",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 18,
+        "near_oi": 143555500.0,
+        "next_oi": 19527500.0,
+        "near_settle": 1177.9,
+        "next_settle": 1183.3,
+        "roll_pct": 11.973964177749979,
+        "spread": 5.399999999999864
+      },
+      {
+        "date": "2026-10-12",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 15,
+        "near_oi": 144250500.0,
+        "next_oi": 21534000.0,
+        "near_settle": 1160.2,
+        "next_settle": 1166.2,
+        "roll_pct": 12.989151579309283,
+        "spread": 6.0
+      },
+      {
+        "date": "2026-10-13",
+        "near_expiry": "2026-10-27",
+        "next_expiry": "2026-11-23",
+        "dte": 14,
+        "near_oi": 144897000.0,
+        "next_oi": 23717500.0,
+        "near_settle": 1174.3,
+        "next_settle": 1180.3,
+        "roll_pct": 14.066109379679684,
+        "spread": 6.0
+      }
+    ]
+  },
+  "prev_cycle": {
+    "NIFTY": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 8852025.0,
+        "next_oi": 13541970.0,
+        "near_settle": 22819.6,
+        "next_settle": 22910.7,
+        "roll_pct": 60.47143441802144,
+        "spread": 91.10000000000218
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 17746040.0,
+        "next_oi": 3428880.0,
+        "near_settle": 23272.3,
+        "next_settle": 23370.6,
+        "roll_pct": 16.19311902949338,
+        "spread": 98.29999999999927
+      }
+    },
+    "BANKNIFTY": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 991260.0,
+        "next_oi": 1781610.0,
+        "near_settle": 54556.2,
+        "next_settle": 54854.6,
+        "roll_pct": 64.25147951400535,
+        "spread": 298.40000000000146
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 2143710.0,
+        "next_oi": 313080.0,
+        "near_settle": 56407.8,
+        "next_settle": 56682.6,
+        "roll_pct": 12.743457926806931,
+        "spread": 274.79999999999563
+      }
+    },
+    "FINNIFTY": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 29280.0,
+        "next_oi": 9780.0,
+        "near_settle": 24693.7,
+        "next_settle": 24935.1,
+        "roll_pct": 25.038402457757297,
+        "spread": 241.39999999999782
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 41520.0,
+        "next_oi": 120.0,
+        "near_settle": 25317.6,
+        "next_settle": 25442.38,
+        "roll_pct": 0.2881844380403458,
+        "spread": 124.78000000000247
+      }
+    },
+    "MIDCPNIFTY": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 1171320.0,
+        "next_oi": 2398080.0,
+        "near_settle": 13762.6,
+        "next_settle": 13794.8,
+        "roll_pct": 67.18440073962012,
+        "spread": 32.19999999999891
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 2799960.0,
+        "next_oi": 108120.0,
+        "near_settle": 14320.0,
+        "next_settle": 14356.8,
+        "roll_pct": 3.717916976149212,
+        "spread": 36.79999999999927
+      }
+    },
+    "HDFCBANK": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 70253300.0,
+        "next_oi": 313697150.0,
+        "near_settle": 719.9,
+        "next_settle": 723.55,
+        "roll_pct": 81.70250874819915,
+        "spread": 3.6499999999999773
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 347363250.0,
+        "next_oi": 61190350.0,
+        "near_settle": 721.7,
+        "next_settle": 725.0,
+        "roll_pct": 14.977312646370022,
+        "spread": 3.2999999999999545
+      }
+    },
+    "RELIANCE": {
+      "expiry": "2026-09-29",
+      "final": {
+        "date": "2026-09-28",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 1,
+        "near_oi": 26214000.0,
+        "next_oi": 122133500.0,
+        "near_settle": 1200.6,
+        "next_settle": 1206.6,
+        "roll_pct": 82.32932809787829,
+        "spread": 6.0
+      },
+      "same_offset": {
+        "date": "2026-09-16",
+        "near_expiry": "2026-09-29",
+        "next_expiry": "2026-10-27",
+        "dte": 13,
+        "near_oi": 124483000.0,
+        "next_oi": 19510000.0,
+        "near_settle": 1247.6,
+        "next_settle": 1253.6,
+        "roll_pct": 13.549269756168702,
+        "spread": 6.0
+      }
+    }
+  },
+  "positioning": {
+    "cur_date": "2026-10-13",
+    "ref_date": "2026-10-06",
+    "rows": {
+      "Client": {
+        "net": 229857,
+        "net_chg": -7243,
+        "pcr": 1.17,
+        "pcr_chg": 0.12
+      },
+      "DII": {
+        "net": 34531,
+        "net_chg": 630,
+        "pcr": 0.76,
+        "pcr_chg": -0.91
+      },
+      "FII": {
+        "net": -289495,
+        "net_chg": 4230,
+        "pcr": 1.15,
+        "pcr_chg": 0.02
+      },
+      "Pro": {
+        "net": 25107,
+        "net_chg": 2383,
+        "pcr": 1.06,
+        "pcr_chg": 0.18
+      }
+    }
+  },
+  "vix": {
+    "last": 14.630000114440918,
+    "chg": 0.7399997711181641,
+    "week_min": 14.119999885559082,
+    "week_max": 15.279999732971191,
+    "rank": 71.03174603174604
+  },
+  "term_structure": {
+    "NIFTY": [
+      [
+        "2026-10-19",
+        12.91
+      ],
+      [
+        "2026-10-27",
+        12.6
+      ]
+    ],
+    "BANKNIFTY": [
+      [
+        "2026-10-27",
+        14.08
+      ],
+      [
+        "2026-11-23",
+        13.34
+      ]
+    ],
+    "FINNIFTY": [
+      [
+        "2026-10-27",
+        16.89
+      ],
+      [
+        "2026-11-23",
+        17.99
+      ]
+    ],
+    "MIDCPNIFTY": [
+      [
+        "2026-10-27",
+        17.35
+      ],
+      [
+        "2026-11-23",
+        18.31
+      ]
+    ],
+    "HDFCBANK": [
+      [
+        "2026-10-27",
+        22.55
+      ],
+      [
+        "2026-11-23",
+        21.57
+      ]
+    ],
+    "RELIANCE": [
+      [
+        "2026-10-27",
+        24.04
+      ],
+      [
+        "2026-11-23",
+        23.64
+      ]
+    ]
+  },
+  "headline": "Monthly rollover into 2026-10-27 - 13 calendar days left; NIFTY roll 12% (5s ago 11%); prev cycle closed 60%",
+  "text": "NSE MONTHLY ROLLOVER SPECIAL - 2026-10-14\nHeadline: Monthly rollover into 2026-10-27 - 13 calendar days left; NIFTY roll 12% (5s ago 11%); prev cycle closed 60%\n\nCURRENT STATE (data 2026-10-13, expiry 2026-10-27)\n  NIFTY       roll 12% (5s 11%) | spread +102.7pts (+0.45%) | 5s nearOI -239,460, nextOI +114,855 | positions carried to next month\n  BANKNIFTY   roll 8% (5s 7%) | spread +278.2pts (+0.50%) | 5s nearOI -34,020, nextOI +25,230 | positions carried to next month; carry premium narrowed\n  FINNIFTY    roll 1% (5s 1%) | spread -455.1pts (-1.79%) | 5s nearOI -2,940, nextOI +0 | net unwinding; next-month OI thin (spread unreliable)\n  MIDCPNIFTY  roll 5% (5s 4%) | spread +51.6pts (+0.37%) | 5s nearOI +75,960, nextOI +24,960 | steady\n  HDFCBANK    roll 10% (5s 8%) | spread +3.8pts (+0.52%) | 5s nearOI -28,647,450, nextOI +6,299,150 | roll-in accelerating; positions carried to next month\n  RELIANCE    roll 14% (5s 11%) | spread +6.0pts (+0.51%) | 5s nearOI +1,237,500, nextOI +6,478,500 | roll-in accelerating\n\nROLL TRAJECTORY (roll %, last sessions)\n  session           NIFTY  BANKNIFTY   FINNIFTY  MIDCPNIFT   HDFCBANK   RELIANCE\n  2026-10-01          11%         6%         1%         4%         7%        10%\n  2026-10-05          11%         7%         1%         4%         7%        10%\n  2026-10-06          11%         7%         1%         4%         8%        11%\n  2026-10-07          11%         7%         1%         4%         8%        11%\n  2026-10-08          11%         7%         1%         4%         8%        11%\n  2026-10-09          11%         7%         1%         5%         9%        12%\n  2026-10-12          12%         8%         1%         5%         9%        13%\n  2026-10-13          12%         8%         1%         5%        10%        14%\n\nPREVIOUS CYCLE (2026-09-29)\n  NIFTY       final 60% (2026-09-28) | at T-13d 16% (2026-09-16)\n  BANKNIFTY   final 64% (2026-09-28) | at T-13d 13% (2026-09-16)\n  FINNIFTY    final 25% (2026-09-28) | at T-13d 0% (2026-09-16)\n  MIDCPNIFTY  final 67% (2026-09-28) | at T-13d 4% (2026-09-16)\n  HDFCBANK    final 82% (2026-09-28) | at T-13d 15% (2026-09-16)\n  RELIANCE    final 82% (2026-09-28) | at T-13d 14% (2026-09-16)\n\nPOSITIONING (5s): FII net -289495 (+4,230); Client net 229857 (-7,243)\nVOL: India VIX 14.63 (+0.74), rank 71\n  NIFTY term: 2026-10-19:12.91 -> 2026-10-27:12.60\n  BANKNIFTY term: 2026-10-27:14.08 -> 2026-11-23:13.34\n  FINNIFTY term: 2026-10-27:16.89 -> 2026-11-23:17.99\n  MIDCPNIFTY term: 2026-10-27:17.35 -> 2026-11-23:18.31\n  HDFCBANK term: 2026-10-27:22.55 -> 2026-11-23:21.57\n  RELIANCE term: 2026-10-27:24.04 -> 2026-11-23:23.64\n\nFull page: https://posu303-tech.github.io/nse-deriv-monitor/rollover.html"
+}
