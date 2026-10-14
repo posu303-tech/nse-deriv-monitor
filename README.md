@@ -65,7 +65,35 @@ Notes:
 - IV rank (`iv_rank_local`) needs ~8 sessions of history to appear, and a few
   weeks to be genuinely informative. India VIX rank (1y) is available from day one.
 
-## Scheduled / recurring use (optional)
+## Scheduled / recurring use
+
+### Cloud (GitHub Actions + Pages) — this repo is already set up
+
+- **Repo:** https://github.com/posu303-tech/nse-deriv-monitor (public)
+- **Public dashboard:** https://posu303-tech.github.io/nse-deriv-monitor/
+- **Schedule:** weekdays at 14:45 UTC (~20:15 IST) via `.github/workflows/monitor.yml`
+- **Every run:** publishes the latest report to the dashboard, and commits the
+  SQLite history (`data/`), reports (`output/`) and console log back to `main`.
+
+Manual controls (needs `gh` CLI authenticated, or use the Actions tab on GitHub):
+
+```bash
+# run once right now
+gh workflow run monitor.yml -R posu303-tech/nse-deriv-monitor
+
+# one-off: seed a year of participant-OI history (check progress in the Actions log)
+gh workflow run monitor.yml -R posu303-tech/nse-deriv-monitor -f backfill_days=365
+
+# watch / inspect runs
+gh run list -R posu303-tech/nse-deriv-monitor
+gh run view <run-id> -R posu303-tech/nse-deriv-monitor --log
+```
+
+To change the schedule, edit the `cron:` line in `.github/workflows/monitor.yml`
+(UTC times; IST = UTC + 5:30). Keep it after ~18:00 IST so that the bhavcopy and
+participant OI archives for the day are already published.
+
+### Local (optional)
 
 Register a Windows scheduled task to run the monitor on weekdays after
 NSE publishes EOD data (e.g. 19:30 IST):
@@ -80,10 +108,12 @@ Remove it with: `schtasks /Delete /TN "NSE Deriv Monitor" /F`
 
 | Symptom | Cause / fix |
 |---|---|
-| `live chain unavailable (throttled)` | Normal. The tool uses bhavcopy instead. Don't hammer the API; for a live intraday chain, open nseindia.com/option-chain in a browser. |
-| Participant OI missing for latest day | NSE publishes the archive after EOD. Run later in the evening. |
+| `live chain unavailable (throttled)` | Normal (especially from cloud runners). The tool uses bhavcopy instead. For a live intraday chain, open nseindia.com/option-chain in a browser. |
+| Participant OI missing for latest day | NSE publishes the archive after EOD. The scheduled 20:15 IST run catches it. |
 | `india_vix_cache.json` stale | Cache auto-refreshes after 20h; check internet access to Yahoo Finance. |
 | Wrong day's data | Check the `snapshot <date>` line — bhavcopy is always the *latest published* session. |
+| Workflow fails at "Connectivity smoke test" | NSE/archives unreachable from the runner that time; check the smoke-test log, usually transient. |
+| Dashboard not updating | Check the latest Actions run; Pages deploys ~1 min after the run completes. |
 
 ## Extending
 
