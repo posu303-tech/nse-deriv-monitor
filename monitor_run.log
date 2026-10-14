@@ -14,7 +14,7 @@
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  14-Oct-2026 16:39 IST
+  NSE DERIVATIVES MONITOR  |  14-Oct-2026 17:27 IST
 ==========================================================================
 
 L1 POSITIONING - participant OI (2026-10-13 vs 2026-10-06)
@@ -73,17 +73,11 @@ L2 VOL / L3 MICROSTRUCTURE - RELIANCE
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1639.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1639.html
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1727.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1727.html
 trends.html written: 3 panels, 752 date points, 51 KB
   - positioning: 246 points, 4 series
   - options_pcr: 246 points, 4 series
   - volatility: 260 points, 8 series
-
-NSE Monitor TEST alert - 14-Oct-2026 16:39 IST
-
-* Test alert - delivery pipeline is working. Real alerts fire on FII positioning shifts, VIX-rank extremes, IV/realized gaps and PCR extremes.
-
-Dashboard: https://posu303-tech.github.io/nse-deriv-monitor/
-
-  github issue: created https://api.github.com/repos/posu303-tech/nse-deriv-monitor/issues/2
+evaluating: monitor_20261014_1727.json
+no alerts fired

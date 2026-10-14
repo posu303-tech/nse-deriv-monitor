@@ -1,9 +1,4 @@
 {
-  "fired": [
-    "test_alert"
-  ],
-  "delivered": [
-    "github-issue"
-  ],
-  "at": "2026-10-14T16:39:29+05:30"
+  "fired": [],
+  "evaluated": "/home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1727.json"
 }
