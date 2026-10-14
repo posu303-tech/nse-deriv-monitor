@@ -1,0 +1,84 @@
+name: NSE Derivatives Monitor
+
+on:
+  schedule:
+    # Weekdays ~20:15 IST (14:45 UTC) - after NSE EOD archives are published
+    - cron: "45 14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      backfill_days:
+        description: "One-off: fetch this many calendar days of participant OI history (0 = normal run)"
+        required: false
+        default: "0"
+      skip_connectivity_test:
+        description: "Skip the connectivity smoke test"
+        type: boolean
+        required: false
+        default: false
+
+concurrency:
+  group: nse-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Kolkata
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Connectivity smoke test
+        if: ${{ !inputs.skip_connectivity_test }}
+        run: python test_connectivity.py
+
+      - name: Refresh history (if requested)
+        if: ${{ inputs.backfill_days != '' && inputs.backfill_days != '0' }}
+        run: python nse_deriv_monitor.py --backfill ${{ inputs.backfill_days }}
+
+      - name: Run monitor
+        run: python nse_deriv_monitor.py 2>&1 | tee monitor_run.log
+
+      - name: Publish dashboard to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          STAMP=$(date +%Y%m%d_%H%M)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch origin gh-pages --depth=1 || true
+          REPORT=$(ls -t output/monitor_*.html | head -1)
+          REPORT_JSON=$(ls -t output/monitor_*.json | head -1)
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git worktree add ../pages origin/gh-pages
+          else
+            git worktree add --detach ../pages
+          fi
+          cd ../pages
+          git checkout -B gh-pages 2>/dev/null || git checkout --orphan gh-pages
+          cp "../$REPORT" "monitor_${STAMP}.html"
+          cp "../$REPORT" index.html
+          cp "../$REPORT_JSON" latest.json
+          git add -A
+          git commit -m "report ${STAMP}" || echo "no changes to commit"
+          git push "$REPO_URL" gh-pages --force
+
+      - name: Commit history to main
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data output monitor_run.log
+          git commit -m "monitor run $(date +%Y-%m-%d %H:%M %Z)" || echo "no changes to commit"
+          git push

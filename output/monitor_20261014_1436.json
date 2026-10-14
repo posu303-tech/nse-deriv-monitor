@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-10-14T14:36:13+05:30",
+  "symbols": {
+    "NIFTY": {},
+    "BANKNIFTY": {}
+  },
+  "participant": {
+    "latest_date": "2026-10-13",
+    "ref_date": "2026-10-06",
+    "rows": {
+      "Client": {
+        "idx_fut_long": 289087,
+        "idx_fut_short": 59230,
+        "idx_fut_net": 229857,
+        "idx_fut_net_prev": 237100,
+        "long_ratio": 82.99537490274663,
+        "idx_opt_pcr": 1.1718641397630305
+      },
+      "DII": {
+        "idx_fut_long": 48831,
+        "idx_fut_short": 14300,
+        "idx_fut_net": 34531,
+        "idx_fut_net_prev": 33901,
+        "long_ratio": 77.34868764949074,
+        "idx_opt_pcr": 0.755603649738869
+      },
+      "FII": {
+        "idx_fut_long": 35416,
+        "idx_fut_short": 324911,
+        "idx_fut_net": -289495,
+        "idx_fut_net_prev": -293725,
+        "long_ratio": 9.828849905780029,
+        "idx_opt_pcr": 1.1459951505711559
+      },
+      "Pro": {
+        "idx_fut_long": 57667,
+        "idx_fut_short": 32560,
+        "idx_fut_net": 25107,
+        "idx_fut_net_prev": 22724,
+        "long_ratio": 63.913241047579994,
+        "idx_opt_pcr": 1.0554590226236387
+      }
+    }
+  },
+  "cash": {
+    "2026-10-13": {
+      "FII/FPI": {
+        "buy": 13465.39,
+        "sell": 14770.52,
+        "net": -1305.13
+      },
+      "DII": {
+        "buy": 16232.97,
+        "sell": 13793.73,
+        "net": 2439.24
+      }
+    }
+  },
+  "vix": {
+    "source": "cache",
+    "last": 14.630000114440918,
+    "rank_1y": 71.03174603174604,
+    "pct_1y": 71.42857142857143,
+    "min_1y": 9.149999618530273,
+    "max_1y": 27.889999389648438
+  },
+  "nifty_realvol": {
+    "rv10": 17.089274244659954,
+    "rv21": 14.837641647446251
+  }
+}

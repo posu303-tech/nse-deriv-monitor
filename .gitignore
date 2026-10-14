@@ -1,0 +1,6 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local-only caches are regenerated automatically; keep DB and reports tracked.
+# (We intentionally track data/ and output/ so the hosted workflow can commit history.)
