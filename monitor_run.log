@@ -14,8 +14,22 @@
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  14-Oct-2026 17:27 IST
+  NSE DERIVATIVES MONITOR  |  14-Oct-2026 18:17 IST
 ==========================================================================
+
+WHAT CHANGED (since previous session)
+  > FII covering slightly; VIX rank +3; NIFTY first snapshot; BANKNIFTY first snapshot
+  - FII index futures net -289,495 (+6,365 d/d, +4,230 w/w) - covering / reducing shorts
+  - Cash market: FII net -1,857.4 cr (prev -1,305.1 cr); DII net +2,670.4 cr
+  - India VIX 14.63 (+0.51), 1y rank 71 (+3 pts)
+  - NIFTY: first snapshot (2026-10-13) - deltas start next session
+  - BANKNIFTY: first snapshot (2026-10-13) - deltas start next session
+  - FINNIFTY: first snapshot (2026-10-13) - deltas start next session
+  - MIDCPNIFTY: first snapshot (2026-10-13) - deltas start next session
+  - HDFCBANK: first snapshot (2026-10-13) - deltas start next session
+  - RELIANCE: first snapshot (2026-10-13) - deltas start next session
+  - NIFTY realized vol 21d 14.84% (+0.01)
+--------------------------------------------------------------------------
 
 L1 POSITIONING - participant OI (2026-10-13 vs 2026-10-06)
   Participant     Fut L     Fut S        Net   d vs ref     L/S  Opt PCR
@@ -26,6 +40,7 @@ L1 POSITIONING - participant OI (2026-10-13 vs 2026-10-06)
     (FII net short futures ~ hedging flows; PCR > 1 = put-heavy positioning)
 
   FII / DII CASH MARKET (Rs crore)
+    2026-10-14:  FII -1,857.4   DII +2,670.4
     2026-10-13:  FII -1,305.1   DII +2,439.2
 
 L2 VOL / L3 MICROSTRUCTURE - NIFTY
@@ -73,11 +88,11 @@ L2 VOL / L3 MICROSTRUCTURE - RELIANCE
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1727.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1727.html
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1817.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261014_1817.html
 trends.html written: 3 panels, 752 date points, 51 KB
   - positioning: 246 points, 4 series
   - options_pcr: 246 points, 4 series
   - volatility: 260 points, 8 series
-evaluating: monitor_20261014_1727.json
+evaluating: monitor_20261014_1817.json
 no alerts fired
