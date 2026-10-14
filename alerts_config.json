@@ -1,0 +1,35 @@
+{
+  "default_cooldown_days": 5,
+  "rules": [
+    {
+      "name": "fii_futures_shift",
+      "enabled": true,
+      "threshold_contracts": 50000,
+      "cooldown_days": 7,
+      "description": "FII index-futures net position moved more than the threshold week-over-week"
+    },
+    {
+      "name": "vix_rank_extreme",
+      "enabled": true,
+      "high": 85,
+      "low": 15,
+      "cooldown_days": 7,
+      "description": "India VIX 1-year percentile rank in an extreme zone"
+    },
+    {
+      "name": "iv_rv_gap",
+      "enabled": true,
+      "threshold_vol_pts": 5.0,
+      "cooldown_days": 5,
+      "description": "NIFTY ATM IV vs 21-day realized vol gap beyond threshold"
+    },
+    {
+      "name": "fii_option_pcr_extreme",
+      "enabled": true,
+      "high": 1.5,
+      "low": 0.6,
+      "cooldown_days": 5,
+      "description": "FII index-options put/call ratio in an extreme zone"
+    }
+  ]
+}

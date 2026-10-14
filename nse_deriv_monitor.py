@@ -64,6 +64,8 @@ OI_COLS = [
     "total_long", "total_short",
 ]
 YF_MAP = {"NIFTY": "^NSEI", "BANKNIFTY": "^NSEBANK"}
+INDEX_SYMBOLS = {"NIFTY", "BANKNIFTY", "FINNIFTY", "MIDCPNIFTY"}
+DEFAULT_SYMBOLS = ["NIFTY", "BANKNIFTY", "FINNIFTY", "MIDCPNIFTY", "HDFCBANK", "RELIANCE"]
 
 
 # ================================================================ http utils
@@ -431,11 +433,11 @@ def bhavcopy_option_data(rows, trade_dt, symbol):
             exp_d = parse_ymd(exp)
         except ValueError:
             continue
-        if ftp == "IDF":
+        if ftp in ("IDF", "STF"):
             futures[exp] = to_float(r.get("SttlmPric"))
             if underlying is None:
                 underlying = to_float(r.get("UndrlygPric"))
-        elif ftp == "IDO" and exp_d > trade_dt:
+        elif ftp in ("IDO", "STO") and exp_d > trade_dt:
             strike = to_float(r.get("StrkPric"))
             opt = r.get("OptnTp")
             if strike is None or opt not in ("CE", "PE"):
@@ -585,7 +587,7 @@ def chain_strikes(rec):
 
 def fetch_live_chain_snapshot(conn, symbol, attempts=2, verbose=True):
     """Best-effort live option chain (often throttled). Returns dict or None."""
-    params = {"type": "Indices", "symbol": symbol}
+    params = {"type": "Indices" if symbol in INDEX_SYMBOLS else "Equity", "symbol": symbol}
     url = "https://www.nseindia.com/api/option-chain-v3?" + urllib.parse.urlencode(params)
     rec = None
     for i in range(attempts):
@@ -1045,7 +1047,9 @@ th{color:#9fb3d1} td:first-child,th:first-child{text-align:left}
             parts.append(card("NIFTY realized vol",
                               f"{fmt(rv.get('rv10'))}% / {fmt(rv.get('rv21'))}%", "10d / 21d"))
         parts.append("</div>")
-    parts.append("<p class='muted'>Sources: NSE participant-wise OI archive, NSE F&amp;O bhavcopy, "
+    parts.append("<p class='muted'><a href='trends.html'>Trends dashboard</a> &middot; "
+                 "<a href='latest.json'>latest.json</a> &middot; "
+                 "Sources: NSE participant-wise OI archive, NSE F&amp;O bhavcopy, "
                  "NSE FII/DII API, Yahoo Finance. Educational tool, not investment advice.</p>"
                  "</body></html>")
     return "".join(parts)
@@ -1060,7 +1064,7 @@ def main():
         pass
 
     ap = argparse.ArgumentParser(description="NSE derivatives monitoring workflow")
-    ap.add_argument("--symbols", nargs="+", default=["NIFTY", "BANKNIFTY"])
+    ap.add_argument("--symbols", nargs="+", default=DEFAULT_SYMBOLS)
     ap.add_argument("--data-dir",
                     default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "data"))
     ap.add_argument("--out-dir",
@@ -1089,8 +1093,13 @@ def main():
         fetch_cash_flows(conn)
         print("[3/4] Option chain snapshots...")
         bhav_rows, bhav_dt = fetch_bhavcopy()
+        live_ok = True
         for sym in args.symbols:
-            got = fetch_live_chain_snapshot(conn, sym)
+            got = None
+            if live_ok:
+                got = fetch_live_chain_snapshot(conn, sym)
+                if not got:
+                    live_ok = False  # throttled: use bhavcopy for all remaining symbols
             if not got and bhav_rows:
                 snapshot_from_bhavcopy(conn, bhav_rows, bhav_dt, sym)
         print("[4/4] Vol context (India VIX / realized vol caches)...")
