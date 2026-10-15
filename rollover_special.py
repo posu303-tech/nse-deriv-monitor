@@ -11,7 +11,8 @@ so the page tracks the roll in real time; deliveries fire twice per cycle:
 Contents:
   - Current roll state per symbol: roll %, roll spread (carry), 5-session OI changes
   - Roll trajectory: roll % by session over the last ~10 sessions
-  - Previous cycle comparison: final roll % and roll % at the same days-to-expiry
+  - Cycle history: final roll % and roll % at the same days-to-expiry for the last
+    N completed cycles (default 4), with averages - the sell-side style comparison
   - Positioning into expiry (participant 5-session changes)
   - Volatility into expiry (India VIX rank, ATM IV term structure)
 
@@ -29,6 +30,7 @@ import argparse
 import json
 import os
 import sqlite3
+import statistics
 import sys
 from datetime import datetime, timedelta
 
@@ -107,11 +109,40 @@ def roll_on_or_before(conn, sym, target_date, expiry_iso):
     return None
 
 
+def cycle_history(conn, sym, anchor, dte, n_cycles=4):
+    """Last N completed cycles: final roll % and roll % at the current T-offset."""
+    expiries = [e for (e,) in conn.execute(
+        "SELECT DISTINCT expiry FROM fut_snapshot WHERE symbol=?", (sym,)) if e < anchor]
+    if not expiries:
+        return []
+    out = []
+    for e in sorted(expiries)[-n_cycles:][::-1]:  # most recent cycle first
+        e_d = mon.parse_ymd(e)
+        fin = roll_on_or_before(conn, sym, (e_d - timedelta(days=1)).isoformat(), e)
+        off = roll_on_or_before(conn, sym, (e_d - timedelta(days=dte)).isoformat(), e)
+        if fin or off:
+            out.append({"expiry": e, "final": fin, "at_offset": off})
+    return out
+
+
+def cycle_averages(hist):
+    finals = [h["final"]["roll_pct"] for h in hist
+              if h.get("final") and h["final"].get("roll_pct") is not None]
+    offs = [h["at_offset"]["roll_pct"] for h in hist
+            if h.get("at_offset") and h["at_offset"].get("roll_pct") is not None]
+    return {
+        "final_avg": statistics.fmean(finals) if finals else None,
+        "final_n": len(finals),
+        "offset_avg": statistics.fmean(offs) if offs else None,
+        "offset_n": len(offs),
+    }
+
+
 def cycle_anchor(conn, symbols):
-    """Nearest monthly futures expiry (prefer NIFTY) and the previous one."""
+    """Nearest monthly futures expiry (min across symbols at the latest data date)."""
     latest = conn.execute("SELECT MAX(date) FROM fut_snapshot").fetchone()[0]
     if not latest:
-        return None, None, None
+        return None, None
     expiries = set()
     for sym in symbols:
         for (e,) in conn.execute(
@@ -120,15 +151,8 @@ def cycle_anchor(conn, symbols):
             if e > latest:
                 expiries.add(e)
     if not expiries:
-        return None, None, latest
-    anchor = min(expiries)
-    prev_candidates = set()
-    for sym in symbols:
-        for (e,) in conn.execute("SELECT DISTINCT expiry FROM fut_snapshot WHERE symbol=?", (sym,)):
-            if e < anchor:
-                prev_candidates.add(e)
-    prev_expiry = max(prev_candidates) if prev_candidates else None
-    return anchor, prev_expiry, latest
+        return None, latest
+    return min(expiries), latest
 
 
 def term_structure(conn, symbols):
@@ -149,11 +173,11 @@ def term_structure(conn, symbols):
     return out
 
 
-def build_payload(data_dir, symbols):
+def build_payload(data_dir, symbols, n_cycles=4):
     db = os.path.join(data_dir, "nse_monitor.db")
     conn = sqlite3.connect(db)
     try:
-        anchor, prev_expiry, last_date = cycle_anchor(conn, symbols)
+        anchor, last_date = cycle_anchor(conn, symbols)
         if not anchor:
             return None
         today = datetime.now(IST).date()
@@ -162,30 +186,21 @@ def build_payload(data_dir, symbols):
         current = wd.rollover_block(conn, symbols)
         trajectories = {sym: roll_trajectory(conn, sym, days=10) for sym in symbols}
 
-        prev_cmp = {}
-        if prev_expiry:
-            prev_d1 = (mon.parse_ymd(prev_expiry) - timedelta(days=1)).isoformat()
-            offset_target = (mon.parse_ymd(prev_expiry) - timedelta(days=dte)).isoformat()
-            for sym in symbols:
-                pf = roll_on_or_before(conn, sym, prev_d1, prev_expiry)
-                ps = roll_on_or_before(conn, sym, offset_target, prev_expiry)
-                if pf or ps:
-                    prev_cmp[sym] = {
-                        "expiry": prev_expiry,
-                        "final": pf,
-                        "same_offset": ps,
-                    }
+        history = {}
+        for sym in symbols:
+            hist = cycle_history(conn, sym, anchor, dte, n_cycles=n_cycles)
+            if hist:
+                history[sym] = {"cycles": hist, "avg": cycle_averages(hist)}
 
         payload = {
             "date": today.isoformat(),
             "generated_at": datetime.now(IST).isoformat(timespec="seconds"),
             "anchor_expiry": anchor,
             "days_to_expiry": dte,
-            "prev_expiry": prev_expiry,
             "last_data_date": last_date,
             "current": current,
             "trajectories": trajectories,
-            "prev_cycle": prev_cmp,
+            "cycle_history": history,
             "positioning": wd.participant_block(conn),
             "vix": wd.vix_block(data_dir),
             "term_structure": term_structure(conn, symbols),
@@ -197,16 +212,17 @@ def build_payload(data_dir, symbols):
 
 
 def headline(p):
-    bits = [f"Monthly rollover into {p['anchor_expiry']} - {p['days_to_expiry']} calendar days left"]
+    dte = p["days_to_expiry"]
+    bits = [f"Monthly rollover into {p['anchor_expiry']} - {dte} calendar days left"]
     nifty = (p.get("current") or {}).get("NIFTY") or {}
     if nifty.get("roll_pct") is not None:
         seg = f"NIFTY roll {nifty['roll_pct']:.0f}%"
         if nifty.get("roll_pct_prev") is not None:
-            seg += f" (5s ago {nifty['roll_pct_prev']:.0f}%)"
+            seg += f" (5s {nifty['roll_pct_prev']:.0f}%)"
+        avg = ((p.get("cycle_history") or {}).get("NIFTY") or {}).get("avg") or {}
+        if avg.get("offset_avg") is not None:
+            seg += f"; {avg['offset_n']}-cycle avg at T-{dte}: {avg['offset_avg']:.0f}%"
         bits.append(seg)
-    pc = ((p.get("prev_cycle") or {}).get("NIFTY") or {}).get("final") or {}
-    if nifty.get("roll_pct") is not None and pc.get("roll_pct") is not None:
-        bits.append(f"prev cycle closed {pc['roll_pct']:.0f}%")
     return "; ".join(bits)
 
 
@@ -242,16 +258,36 @@ def render_text(p):
                 val = next((st["roll_pct"] for st in traj[s] if st["date"] == d), None)
                 row += f"{val:>10.0f}%" if val is not None else f"{'-':>11}"
             L.append(row)
-    prevc = p.get("prev_cycle") or {}
-    if prevc:
+    hist = p.get("cycle_history") or {}
+    if hist:
         L.append("")
-        L.append(f"PREVIOUS CYCLE ({p['prev_expiry']})")
-        for sym, e in prevc.items():
-            fin, off = e.get("final") or {}, e.get("same_offset") or {}
-            seg = f"  {sym:<11} final {mon.fmt(fin.get('roll_pct'), 0)}% ({fin.get('date', '-')})"
-            if off.get("roll_pct") is not None:
-                seg += f" | at T-{p['days_to_expiry']}d {off['roll_pct']:.0f}% ({off['date']})"
-            L.append(seg)
+        L.append(f"ROLL HISTORY (final % | at T-{p['days_to_expiry']}d %)")
+        syms = list(hist.keys())
+        L.append("  " + "cycle".ljust(12) + "".join(f"{s[:10]:>12}" for s in syms))
+
+        def cell(f_, o_):
+            if f_ is None and o_ is None:
+                return "-"
+            fs = f"{f_:.0f}" if f_ is not None else "-"
+            os_ = f"{o_:.0f}" if o_ is not None else "-"
+            return f"{fs}|{os_}"
+
+        cycles = sorted({c["expiry"] for h in hist.values() for c in h["cycles"]},
+                        reverse=True)
+        for e in cycles:
+            row = "  " + e.ljust(12)
+            for s in syms:
+                c = next((c for c in hist[s]["cycles"] if c["expiry"] == e), None)
+                f_ = (c.get("final") or {}).get("roll_pct") if c else None
+                o_ = (c.get("at_offset") or {}).get("roll_pct") if c else None
+                row += f"{cell(f_, o_):>12}"
+            L.append(row)
+        row = "  " + "AVE".ljust(12)
+        for s in syms:
+            a = hist[s]["avg"]
+            row += f"{cell(a.get('final_avg'), a.get('offset_avg')):>12}"
+        L.append(row)
+        L.append("    (AVE = average of available completed cycles for that symbol)")
     pos = p.get("positioning")
     if pos:
         fii = (pos.get("rows") or {}).get("FII") or {}
@@ -300,11 +336,38 @@ def render_markdown(p):
                 cells.append(f"{val:.0f}%" if val is not None else "-")
             L.append(f"| {d} | " + " | ".join(cells) + " |")
         L.append("")
-    prevc = p.get("prev_cycle") or {}
-    if prevc:
-        L.append(f"**Previous cycle ({p['prev_expiry']})**: " + "; ".join(
-            f"{sym}: final {mon.fmt(((e.get('final') or {}).get('roll_pct')), 0)}%"
-            for sym, e in prevc.items()))
+    hist = p.get("cycle_history") or {}
+    if hist:
+        syms = list(hist.keys())
+        cycles = sorted({c["expiry"] for h in hist.values() for c in h["cycles"]},
+                        reverse=True)
+        L.append(f"**Roll history** (final % | at T-{p['days_to_expiry']}d %)")
+        L.append("")
+        L.append("| Cycle | " + " | ".join(syms) + " |")
+        L.append("|" + "---|" * (len(syms) + 1))
+        for e in cycles:
+            cells = []
+            for s in syms:
+                c = next((c for c in hist[s]["cycles"] if c["expiry"] == e), None)
+                f_ = (c.get("final") or {}).get("roll_pct") if c else None
+                o_ = (c.get("at_offset") or {}).get("roll_pct") if c else None
+                parts = []
+                if f_ is not None:
+                    parts.append(f"{f_:.0f}%")
+                if o_ is not None:
+                    parts.append(f"{o_:.0f}%")
+                cells.append(" | ".join(parts) if parts else "-")
+            L.append(f"| {e} | " + " | ".join(cells) + " |")
+        cells = []
+        for s in syms:
+            a = hist[s]["avg"]
+            parts = []
+            if a.get("final_avg") is not None:
+                parts.append(f"{a['final_avg']:.0f}%")
+            if a.get("offset_avg") is not None:
+                parts.append(f"{a['offset_avg']:.0f}%")
+            cells.append(" | ".join(parts) if parts else "-")
+        L.append(f"| **Average** | " + " | ".join(cells) + " |")
         L.append("")
     pos = p.get("positioning")
     if pos:
@@ -372,18 +435,39 @@ th{color:#9fb3d1} td:first-child,th:first-child{text-align:left}
             h.append("</tr>")
         h.append("</table>")
 
-    prevc = p.get("prev_cycle") or {}
-    if prevc:
-        h.append(f"<h2>Previous cycle comparison ({esc(str(p['prev_expiry']))})</h2>")
-        h.append("<table><tr><th>Symbol</th><th>Final roll %</th><th>as of</th>"
-                 f"<th>At T-{p['days_to_expiry']}d</th><th>as of</th></tr>")
-        for sym, e in prevc.items():
-            fin, off = e.get("final") or {}, e.get("same_offset") or {}
-            h.append(f"<tr><td>{esc(sym)}</td><td>{mon.fmt(fin.get('roll_pct'), 0)}%</td>"
-                     f"<td>{esc(str(fin.get('date', '-')))}</td>"
-                     f"<td>{mon.fmt(off.get('roll_pct'), 0)}%</td>"
-                     f"<td>{esc(str(off.get('date', '-')))}</td></tr>")
-        h.append("</table>")
+    hist = p.get("cycle_history") or {}
+    if hist:
+        syms = list(hist.keys())
+        cycles = sorted({c["expiry"] for h in hist.values() for c in h["cycles"]},
+                        reverse=True)
+        h.append(f"<h2>Cycle history (final % | at T-{p['days_to_expiry']}d %)</h2>")
+        h.append("<table><tr><th>Cycle</th>" +
+                 "".join(f"<th>{esc(s)}</th>" for s in syms) + "</tr>")
+        for e in cycles:
+            h.append(f"<tr><td>{esc(e)}</td>")
+            for s in syms:
+                c = next((c for c in hist[s]["cycles"] if c["expiry"] == e), None)
+                f_ = (c.get("final") or {}).get("roll_pct") if c else None
+                o_ = (c.get("at_offset") or {}).get("roll_pct") if c else None
+                parts = []
+                if f_ is not None:
+                    parts.append(f"{f_:.0f}%")
+                if o_ is not None:
+                    parts.append(f"{o_:.0f}%")
+                h.append(f"<td>{' | '.join(parts) if parts else '-'}</td>")
+            h.append("</tr>")
+        h.append("<tr><td><b>Average</b></td>")
+        for s in syms:
+            a = hist[s]["avg"]
+            parts = []
+            if a.get("final_avg") is not None:
+                parts.append(f"{a['final_avg']:.0f}%")
+            if a.get("offset_avg") is not None:
+                parts.append(f"{a['offset_avg']:.0f}%")
+            h.append(f"<td><b>{' | '.join(parts) if parts else '-'}</b></td>")
+        h.append("</tr></table>")
+        h.append("<p class='muted'>Averages cover the completed cycles available in the "
+                 "database for each symbol.</p>")
 
     pos = p.get("positioning")
     if pos:
@@ -427,6 +511,8 @@ def main():
     ap.add_argument("--symbols", nargs="+", default=mon.DEFAULT_SYMBOLS)
     ap.add_argument("--window", type=int, default=7,
                     help="generate within N calendar days of monthly expiry (default 7)")
+    ap.add_argument("--cycles", type=int, default=4,
+                    help="completed cycles to average in the history table (default 4)")
     ap.add_argument("--force", action="store_true",
                     help="generate regardless of the expiry window (testing)")
     ap.add_argument("--no-deliver", action="store_true")
@@ -438,7 +524,7 @@ def main():
         print("rollover special: no database - run the monitor first")
         return 1
 
-    payload = build_payload(args.data_dir, args.symbols)
+    payload = build_payload(args.data_dir, args.symbols, n_cycles=args.cycles)
     if not payload:
         print("rollover special: no futures history - backfill with --backfill-fut first")
         return 0

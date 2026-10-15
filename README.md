@@ -102,8 +102,10 @@ the roll daily). It produces `output/rollover.html` + dated copies:
   5-session near/next OI changes, rule-based notes
 - **Roll trajectory**: roll % by session for the last ~10 sessions (the classic
   month-end acceleration curve)
-- **Previous cycle comparison**: last month's *final* roll % and its roll % at the
-  same days-to-expiry — e.g. "NIFTY at T-13: 12% now vs 16% last cycle"
+- **Cycle history**: final roll % and roll % at the same days-to-expiry for the last
+  4 completed cycles, with averages (sell-side style) — e.g. "NIFTY at T-13: 12% now
+  vs 15% 3-cycle average". Rebuild deeper history anytime with
+  `-f fut_backfill_days=160` (or a one-off local `--backfill-fut 160`).
 - **Positioning into expiry** (participant 5-session changes) and **vol into expiry**
   (India VIX rank, ATM IV term structure per symbol)
 
