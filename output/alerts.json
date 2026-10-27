@@ -1,4 +1,9 @@
 {
-  "fired": [],
-  "evaluated": "/home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261027_0139.json"
+  "fired": [
+    "fii_futures_shift"
+  ],
+  "delivered": [
+    "github-issue"
+  ],
+  "at": "2026-10-28T01:08:22+05:30"
 }
