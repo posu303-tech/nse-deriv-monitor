@@ -1,0 +1,345 @@
+{
+  "generated_at": "2026-11-04T02:08:02+05:30",
+  "symbols": {
+    "NIFTY": {
+      "date": "2026-11-03",
+      "spot": 23810.85,
+      "atm_strike": 23850.0,
+      "expiry": "2026-11-09",
+      "atm_iv": 15.7,
+      "ce_iv": 11.23,
+      "pe_iv": 20.16,
+      "skew_5pct": 6.12,
+      "term_structure": {
+        "2026-11-09": 15.7,
+        "2026-11-17": 13.85,
+        "2026-11-23": 13.61
+      },
+      "pcr": 1.135,
+      "max_ce_oi_strike": 24000.0,
+      "max_pe_oi_strike": 23000.0,
+      "max_pain": 23600.0,
+      "total_ce_oi": 87391395.0,
+      "total_pe_oi": 99217885.0,
+      "basis": null,
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 80.0,
+        "pct": 86.66666666666667
+      },
+      "atm_iv_prev": 18.32,
+      "atm_iv_prev_date": "2026-11-02"
+    },
+    "BANKNIFTY": {
+      "date": "2026-11-03",
+      "spot": 55540.05,
+      "atm_strike": 55600.0,
+      "expiry": "2026-11-23",
+      "atm_iv": 14.37,
+      "ce_iv": 14.03,
+      "pe_iv": 14.71,
+      "skew_5pct": 4.83,
+      "term_structure": {
+        "2026-11-23": 14.37,
+        "2026-12-29": 13.53,
+        "2027-01-25": 16.1
+      },
+      "pcr": 0.971,
+      "max_ce_oi_strike": 58000.0,
+      "max_pe_oi_strike": 58000.0,
+      "max_pain": 55600.0,
+      "total_ce_oi": 13296780.0,
+      "total_pe_oi": 12913530.0,
+      "basis": {
+        "close": 24.55,
+        "expiry": "2026-11-23"
+      },
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 33.33333333333333,
+        "pct": 40.0
+      },
+      "atm_iv_prev": 14.5,
+      "atm_iv_prev_date": "2026-11-02"
+    },
+    "FINNIFTY": {
+      "date": "2026-11-03",
+      "spot": 25357.9,
+      "atm_strike": 25350.0,
+      "expiry": "2026-11-23",
+      "atm_iv": 15.39,
+      "ce_iv": 15.43,
+      "pe_iv": 15.35,
+      "skew_5pct": -1.93,
+      "term_structure": {
+        "2026-11-23": 15.39,
+        "2026-12-29": 16.8,
+        "2027-01-25": 16.8
+      },
+      "pcr": 1.337,
+      "max_ce_oi_strike": 25000.0,
+      "max_pe_oi_strike": 24600.0,
+      "max_pain": 25000.0,
+      "total_ce_oi": 202860.0,
+      "total_pe_oi": 271140.0,
+      "basis": {
+        "close": -20.4,
+        "expiry": "2026-11-23"
+      },
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 20.0,
+        "pct": 26.666666666666668
+      },
+      "atm_iv_prev": 15.57,
+      "atm_iv_prev_date": "2026-11-02"
+    },
+    "MIDCPNIFTY": {
+      "date": "2026-11-03",
+      "spot": 13560.9,
+      "atm_strike": 13575.0,
+      "expiry": "2026-11-23",
+      "atm_iv": 18.45,
+      "ce_iv": 18.08,
+      "pe_iv": 18.82,
+      "skew_5pct": 4.35,
+      "term_structure": {
+        "2026-11-23": 18.45,
+        "2026-12-29": 18.38,
+        "2027-01-25": 18.38
+      },
+      "pcr": 1.252,
+      "max_ce_oi_strike": 14000.0,
+      "max_pe_oi_strike": 13000.0,
+      "max_pain": 13400.0,
+      "total_ce_oi": 5437440.0,
+      "total_pe_oi": 6808920.0,
+      "basis": {
+        "close": 4.7,
+        "expiry": "2026-11-23"
+      },
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 26.666666666666668,
+        "pct": 33.33333333333333
+      },
+      "atm_iv_prev": 19.55,
+      "atm_iv_prev_date": "2026-11-02"
+    },
+    "HDFCBANK": {
+      "date": "2026-11-03",
+      "spot": 725.5,
+      "atm_strike": 730.0,
+      "expiry": "2026-11-23",
+      "atm_iv": 19.01,
+      "ce_iv": 18.59,
+      "pe_iv": 19.43,
+      "skew_5pct": 2.41,
+      "term_structure": {
+        "2026-11-23": 19.01,
+        "2026-12-29": 19.86,
+        "2027-01-25": 21.61
+      },
+      "pcr": 0.852,
+      "max_ce_oi_strike": 700.0,
+      "max_pe_oi_strike": 720.0,
+      "max_pain": 710.0,
+      "total_ce_oi": 95854850.0,
+      "total_pe_oi": 81636100.0,
+      "basis": {
+        "close": 0.5,
+        "expiry": "2026-11-23"
+      },
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 13.333333333333334,
+        "pct": 20.0
+      },
+      "atm_iv_prev": 20.69,
+      "atm_iv_prev_date": "2026-11-02"
+    },
+    "RELIANCE": {
+      "date": "2026-11-03",
+      "spot": 1307.88,
+      "atm_strike": 1310.0,
+      "expiry": "2026-11-23",
+      "atm_iv": 20.38,
+      "ce_iv": 20.27,
+      "pe_iv": 20.48,
+      "skew_5pct": 2.61,
+      "term_structure": {
+        "2026-11-23": 20.38,
+        "2026-12-29": 20.7,
+        "2027-01-25": 25.05
+      },
+      "pcr": 0.84,
+      "max_ce_oi_strike": 1300.0,
+      "max_pe_oi_strike": 1200.0,
+      "max_pain": 1250.0,
+      "total_ce_oi": 110824500.0,
+      "total_pe_oi": 93102000.0,
+      "basis": {
+        "close": 0.92,
+        "expiry": "2026-11-23"
+      },
+      "source": "bhavcopy",
+      "iv_rank_local": {
+        "n": 15,
+        "rank": 13.333333333333334,
+        "pct": 20.0
+      },
+      "atm_iv_prev": 20.07,
+      "atm_iv_prev_date": "2026-11-02"
+    }
+  },
+  "participant": {
+    "latest_date": "2026-11-03",
+    "ref_date": "2026-10-27",
+    "rows": {
+      "Client": {
+        "idx_fut_long": 219696,
+        "idx_fut_short": 66218,
+        "idx_fut_net": 153478,
+        "idx_fut_net_prev": 194426,
+        "long_ratio": 76.83988891764658,
+        "idx_opt_pcr": 1.15
+      },
+      "DII": {
+        "idx_fut_long": 49883,
+        "idx_fut_short": 6779,
+        "idx_fut_net": 43104,
+        "idx_fut_net_prev": 39380,
+        "long_ratio": 88.03607355899898,
+        "idx_opt_pcr": 13.569
+      },
+      "FII": {
+        "idx_fut_long": 33148,
+        "idx_fut_short": 235905,
+        "idx_fut_net": -202757,
+        "idx_fut_net_prev": -221057,
+        "long_ratio": 12.320249170237835,
+        "idx_opt_pcr": 1.174
+      },
+      "Pro": {
+        "idx_fut_long": 28440,
+        "idx_fut_short": 22265,
+        "idx_fut_net": 6175,
+        "idx_fut_net_prev": -12749,
+        "long_ratio": 56.08914308253624,
+        "idx_opt_pcr": 1.147
+      }
+    }
+  },
+  "cash": {
+    "2026-11-03": {
+      "FII/FPI": {
+        "buy": 20970.51,
+        "sell": 14133.7,
+        "net": 6836.81
+      },
+      "DII": {
+        "buy": 16723.91,
+        "sell": 20402.76,
+        "net": -3678.85
+      }
+    },
+    "2026-11-02": {
+      "FII/FPI": {
+        "buy": 16499.46,
+        "sell": 13384.78,
+        "net": 3114.68
+      },
+      "DII": {
+        "buy": 14988.48,
+        "sell": 15380.68,
+        "net": -392.2
+      }
+    },
+    "2026-10-30": {
+      "FII/FPI": {
+        "buy": 20564.02,
+        "sell": 16965.48,
+        "net": 3598.54
+      },
+      "DII": {
+        "buy": 16643.55,
+        "sell": 17461.06,
+        "net": -817.51
+      }
+    }
+  },
+  "vix": {
+    "last": 15.5,
+    "rank_1y": 71.42857142857143,
+    "pct_1y": 71.82539682539682,
+    "min_1y": 9.149999618530273,
+    "max_1y": 27.889999389648438,
+    "n": 252,
+    "prev_last": 15.300000190734863,
+    "rank_1y_prev": 71.03174603174604
+  },
+  "nifty_realvol": {
+    "rv10": 13.301243325041353,
+    "rv21": 15.594094457714435,
+    "rv21_prev": 14.709338231334696
+  },
+  "changes": {
+    "headline": "FII covering slightly; VIX rank unchanged; NIFTY walls held; PCR -0.53; BANKNIFTY walls moved; PCR +0.01",
+    "lines": [
+      "FII index futures net -202,757 (+30,442 d/d, +18,300 w/w) - covering / reducing shorts",
+      "Cash market: FII net +6,836.8 cr (prev +3,114.7 cr); DII net -3,678.8 cr",
+      "India VIX 15.50 (+0.20), 1y rank 71 (+0 pts)",
+      "NIFTY (2026-11-02 -> 2026-11-03): spot +1.6%; IV 15.70% (-2.62 pts); PCR 1.14 (-0.53); walls unchanged",
+      "BANKNIFTY (2026-11-02 -> 2026-11-03): spot +1.0%; IV 14.37% (-0.13 pts); PCR 0.97 (+0.01); call wall 57,000->58,000",
+      "FINNIFTY (2026-11-02 -> 2026-11-03): spot +1.8%; IV 15.39% (-0.18 pts); PCR 1.34 (+0.44); call wall 25,500->25,000",
+      "MIDCPNIFTY (2026-11-02 -> 2026-11-03): spot +1.5%; IV 18.45% (-1.10 pts); PCR 1.25 (+0.07); walls unchanged",
+      "HDFCBANK (2026-11-02 -> 2026-11-03): spot +3.6%; IV 19.01% (-1.68 pts); PCR 0.85 (+0.17); put wall 700->720",
+      "RELIANCE (2026-11-02 -> 2026-11-03): spot +0.6%; IV 20.38% (+0.31 pts); PCR 0.84 (-0.03); put wall 1,100->1,200",
+      "NIFTY realized vol 21d 15.59% (+0.88)"
+    ],
+    "raw": {
+      "fii_dod": 30442,
+      "fii_wow": 18300,
+      "vix_delta": 0.19999980926513672,
+      "rank_delta": 0.39682539682539186,
+      "rv21_delta": 0.8847562263797393
+    },
+    "symbols": {
+      "NIFTY": {
+        "iv_delta": -2.620000000000001,
+        "pcr_delta": -0.5329999999999999,
+        "walls_changed": false
+      },
+      "BANKNIFTY": {
+        "iv_delta": -0.13000000000000078,
+        "pcr_delta": 0.008000000000000007,
+        "walls_changed": true
+      },
+      "FINNIFTY": {
+        "iv_delta": -0.17999999999999972,
+        "pcr_delta": 0.44399999999999995,
+        "walls_changed": true
+      },
+      "MIDCPNIFTY": {
+        "iv_delta": -1.1000000000000014,
+        "pcr_delta": 0.06800000000000006,
+        "walls_changed": false
+      },
+      "HDFCBANK": {
+        "iv_delta": -1.6799999999999997,
+        "pcr_delta": 0.16799999999999993,
+        "walls_changed": true
+      },
+      "RELIANCE": {
+        "iv_delta": 0.3099999999999987,
+        "pcr_delta": -0.028000000000000025,
+        "walls_changed": true
+      }
+    }
+  }
+}
