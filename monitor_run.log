@@ -1,6 +1,5 @@
 [1/4] Participant-wise OI (NSE archives)...
-    participant OI 2026-11-09: OK
-      -> 1 new file(s) stored
+      -> 0 new file(s) stored
 [2/4] FII/DII cash flows...
     cash flow: 2 rows
 [3/4] Option chain snapshots...
@@ -15,14 +14,14 @@
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  10-Nov-2026 05:05 IST
+  NSE DERIVATIVES MONITOR  |  11-Nov-2026 02:30 IST
 ==========================================================================
 
 WHAT CHANGED (since previous session)
-  > FII covering; VIX rank +10; NIFTY walls moved; PCR -0.52; BANKNIFTY walls held; PCR +0.03
+  > FII covering; VIX rank unchanged; NIFTY walls moved; PCR -0.52; BANKNIFTY walls held; PCR +0.03
   - FII index futures net -90,741 (+9,675 d/d, +142,458 w/w) - covering / reducing shorts
   - Cash market: FII net +7,212.2 cr (prev +13,749.8 cr); DII net -7,172.5 cr
-  - India VIX 17.47 (+1.89), 1y rank 81 (+10 pts)
+  - India VIX 17.42 (-0.05), 1y rank 80 (-1 pts)
   - NIFTY (2026-11-06 -> 2026-11-09): spot +0.1%; IV 17.00% (-2.05 pts); PCR 1.14 (-0.52); put wall 24,000->23,000
   - BANKNIFTY (2026-11-06 -> 2026-11-09): spot +1.1%; IV 16.98% (+0.80 pts); PCR 1.27 (+0.03); walls unchanged
   - FINNIFTY (2026-11-06 -> 2026-11-09): spot +0.4%; IV 18.72% (+0.47 pts); PCR 1.11 (+0.06); walls unchanged
@@ -88,7 +87,7 @@ L2 VOL / L3 MICROSTRUCTURE - RELIANCE
     IV rank (local history, 19 sessions): 32th percentile
 
   VOL CONTEXT
-    India VIX 17.47  1y rank 81  1y range 9.15 - 27.89
+    India VIX 17.42  1y rank 80  1y range 9.15 - 27.89
     NIFTY realized vol: 10d 14.57% / 21d 16.03%  (compare with ATM IV)
 
 --------------------------------------------------------------------------
@@ -96,15 +95,15 @@ L2 VOL / L3 MICROSTRUCTURE - RELIANCE
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261110_0505.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261110_0505.html
-weekly digest: not Friday in IST (Tuesday) - skipping (use --force to generate)
-rollover special: 13 days to monthly expiry (2026-11-23) - outside 7-day window, skipping
-trends.html written: 3 panels, 789 date points, 55 KB
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261111_0230.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261111_0230.html
+weekly digest: not Friday in IST (Wednesday) - skipping (use --force to generate)
+rollover special: 12 days to monthly expiry (2026-11-23) - outside 7-day window, skipping
+trends.html written: 3 panels, 788 date points, 55 KB
   archive: 5 weekly digests, 8 rollover specials
   - positioning: 264 points, 4 series
   - options_pcr: 264 points, 4 series
-  - volatility: 261 points, 8 series
-evaluating: monitor_20261110_0505.json
+  - volatility: 260 points, 8 series
+evaluating: monitor_20261111_0230.json
   suppressed (cooldown 7d): fii_futures_shift
 no alerts fired
