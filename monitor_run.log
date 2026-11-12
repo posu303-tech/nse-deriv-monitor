@@ -1,110 +1,146 @@
 [1/4] Participant-wise OI (NSE archives)...
-    participant OI 2026-11-11: OK
+    participant OI 2026-11-12: OK
       -> 1 new file(s) stored
 [2/4] FII/DII cash flows...
     cash flow: 2 rows
 [3/4] Option chain snapshots...
-    bhavcopy 20261111: 42331 rows
+    bhavcopy 20261112: 42967 rows
     NIFTY: live chain unavailable (throttled); using bhavcopy
-    NIFTY (bhavcopy 2026-11-11): spot=25255.0, ATM IV=18.25, PCR=0.769
-    BANKNIFTY (bhavcopy 2026-11-11): spot=60792.4, ATM IV=18.24, PCR=1.174
-    FINNIFTY (bhavcopy 2026-11-11): spot=27663.4, ATM IV=19.96, PCR=1.022
-    MIDCPNIFTY (bhavcopy 2026-11-11): spot=14193.5, ATM IV=21.17, PCR=1.087
-    HDFCBANK (bhavcopy 2026-11-11): spot=806.6, ATM IV=25.41, PCR=0.943
-    RELIANCE (bhavcopy 2026-11-11): spot=1335.4, ATM IV=22.02, PCR=0.79
+    NIFTY (bhavcopy 2026-11-12): spot=25299.3, ATM IV=15.45, PCR=0.849
+    BANKNIFTY (bhavcopy 2026-11-12): spot=61518.5, ATM IV=17.52, PCR=1.281
+    FINNIFTY (bhavcopy 2026-11-12): spot=28057.2, ATM IV=19.29, PCR=1.009
+    MIDCPNIFTY (bhavcopy 2026-11-12): spot=14322.8, ATM IV=19.43, PCR=1.173
+    HDFCBANK (bhavcopy 2026-11-12): spot=812.2, ATM IV=24.41, PCR=0.943
+    RELIANCE (bhavcopy 2026-11-12): spot=1338.3, ATM IV=22.81, PCR=0.779
 [4/4] Vol context (India VIX / realized vol caches)...
 
 ==========================================================================
-  NSE DERIVATIVES MONITOR  |  12-Nov-2026 03:02 IST
+  NSE DERIVATIVES MONITOR  |  13-Nov-2026 03:06 IST
 ==========================================================================
 
 WHAT CHANGED (since previous session)
-  > FII covering; VIX rank unchanged; NIFTY walls moved; PCR -0.37; BANKNIFTY walls moved; PCR -0.10
-  - FII index futures net -70,413 (+20,328 d/d, +132,344 w/w) - covering / reducing shorts
-  - Cash market: FII net +12,563.3 cr (prev +7,212.2 cr); DII net -8,434.5 cr
-  - India VIX 17.42 (-0.05), 1y rank 80 (-1 pts)
-  - NIFTY (2026-11-09 -> 2026-11-11): spot +0.8%; IV 18.25% (+1.25 pts); PCR 0.77 (-0.37); put wall 23,000->24,500
-  - BANKNIFTY (2026-11-09 -> 2026-11-11): spot +1.8%; IV 18.24% (+1.26 pts); PCR 1.17 (-0.10); call wall 58,000->60,500; put wall 58,000->57,000
-  - FINNIFTY (2026-11-09 -> 2026-11-11): spot +1.0%; IV 19.96% (+1.24 pts); PCR 1.02 (-0.08); walls unchanged
-  - MIDCPNIFTY (2026-11-09 -> 2026-11-11): spot +1.0%; IV 21.17% (+0.40 pts); PCR 1.09 (-0.01); call wall 14,000->14,500
-  - HDFCBANK (2026-11-09 -> 2026-11-11): spot +1.1%; IV 25.41% (+0.52 pts); PCR 0.94 (-0.01); walls unchanged
-  - RELIANCE (2026-11-09 -> 2026-11-11): spot +0.8%; IV 22.02% (+0.45 pts); PCR 0.79 (-0.01); call wall 1,320->1,350
-  - NIFTY realized vol 21d 16.03% (-1.68)
+  > FII covering; VIX rank unchanged; NIFTY walls moved; PCR +0.08; BANKNIFTY walls moved; PCR +0.11
+  - FII index futures net -49,719 (+20,694 d/d, +136,260 w/w) - covering / reducing shorts
+  - Cash market: FII net +7,830.6 cr (prev +12,563.3 cr); DII net -6,331.2 cr
+  - India VIX 17.56 (+0.14), 1y rank 81 (+1 pts)
+  - NIFTY (2026-11-11 -> 2026-11-12): spot +0.2%; IV 15.45% (-2.80 pts); PCR 0.85 (+0.08); put wall 24,500->24,000
+  - BANKNIFTY (2026-11-11 -> 2026-11-12): spot +1.2%; IV 17.52% (-0.72 pts); PCR 1.28 (+0.11); put wall 57,000->58,000
+  - FINNIFTY (2026-11-11 -> 2026-11-12): spot +1.4%; IV 19.29% (-0.67 pts); PCR 1.01 (-0.01); call wall 27,500->28,500; put wall 27,000->25,000
+  - MIDCPNIFTY (2026-11-11 -> 2026-11-12): spot +0.9%; IV 19.43% (-1.74 pts); PCR 1.17 (+0.09); call wall 14,500->15,000
+  - HDFCBANK (2026-11-11 -> 2026-11-12): spot +0.7%; IV 24.41% (-1.00 pts); PCR 0.94 (+0.00); walls unchanged
+  - RELIANCE (2026-11-11 -> 2026-11-12): spot +0.2%; IV 22.81% (+0.79 pts); PCR 0.78 (-0.01); put wall 1,200->1,100
+  - NIFTY realized vol 21d 15.84% (-0.18)
 --------------------------------------------------------------------------
 
-L1 POSITIONING - participant OI (2026-11-11 vs 2026-11-03)
+L1 POSITIONING - participant OI (2026-11-12 vs 2026-11-04)
   Participant     Fut L     Fut S        Net   d vs ref     L/S  Opt PCR
-  Client      172162    105154      67008  -86,470ct   62.1%     1.02
-  DII          54376     27224      27152  -15,952ct   66.6%    26.02
-  FII          57226    127639     -70413 +132,344ct   31.0%     1.04
-  Pro          26450     50197     -23747  -29,922ct   34.5%     0.93
+  Client      172115    114170      57945  -91,848ct   60.1%     1.03
+  DII          54372     27224      27148  -15,170ct   66.6%    25.46
+  FII          70744    120463     -49719 +136,260ct   37.0%     1.03
+  Pro          25432     60806     -35374  -29,242ct   29.5%     1.02
     (FII net short futures ~ hedging flows; PCR > 1 = put-heavy positioning)
 
   FII / DII CASH MARKET (Rs crore)
+    2026-11-12:  FII +7,830.6   DII -6,331.2
     2026-11-11:  FII +12,563.3   DII -8,434.5
     2026-11-09:  FII +7,212.2   DII -7,172.5
-    2026-11-06:  FII +13,749.8   DII -5,968.7
 
 L2 VOL / L3 MICROSTRUCTURE - NIFTY
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 25,255.05
-    ATM IV 18.25%  (prev 17.00% on 2026-11-09)
-    Skew (5% OTM put-call) -0.13   PCR 0.77   walls: call 26,000 / put 24,500   max pain 25,100
-    Term structure ATM IV: 17-Nov: 18.25   23-Nov: 16.65   01-Dec: 15.73
-    IV rank (local history, 20 sessions): 80th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 25,299.35
+    ATM IV 15.45%  (prev 18.25% on 2026-11-11)
+    Skew (5% OTM put-call) 0.04   PCR 0.85   walls: call 26,000 / put 24,000   max pain 25,200
+    Term structure ATM IV: 17-Nov: 15.45   23-Nov: 15.63   01-Dec: 15.12
+    IV rank (local history, 21 sessions): 62th percentile
 
 L2 VOL / L3 MICROSTRUCTURE - BANKNIFTY
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 60,792.40  basis -154.6 (fut 23-Nov)
-    ATM IV 18.24%  (prev 16.98% on 2026-11-09)
-    Skew (5% OTM put-call) 0.10   PCR 1.17   walls: call 60,500 / put 57,000   max pain 58,000
-    Term structure ATM IV: 23-Nov: 18.24   29-Dec: 15.49   25-Jan: 16.71
-    IV rank (local history, 20 sessions): 90th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 61,518.50  basis -180.9 (fut 23-Nov)
+    ATM IV 17.52%  (prev 18.24% on 2026-11-11)
+    Skew (5% OTM put-call) 0.96   PCR 1.28   walls: call 60,500 / put 58,000   max pain 59,000
+    Term structure ATM IV: 23-Nov: 17.52   29-Dec: 15.05   25-Jan: 14.45
+    IV rank (local history, 21 sessions): 86th percentile
 
 L2 VOL / L3 MICROSTRUCTURE - FINNIFTY
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 27,663.40  basis -73.4 (fut 23-Nov)
-    ATM IV 19.96%  (prev 18.72% on 2026-11-09)
-    Skew (5% OTM put-call) 5.10   PCR 1.02   walls: call 27,500 / put 27,000   max pain 26,500
-    Term structure ATM IV: 23-Nov: 19.96   29-Dec: 17.44   25-Jan: 17.45
-    IV rank (local history, 20 sessions): 90th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 28,057.15  basis -89.5 (fut 23-Nov)
+    ATM IV 19.29%  (prev 19.96% on 2026-11-11)
+    Skew (5% OTM put-call) -2.76   PCR 1.01   walls: call 28,500 / put 25,000   max pain 27,000
+    Term structure ATM IV: 23-Nov: 19.29   29-Dec: 17.47   25-Jan: 17.48
+    IV rank (local history, 21 sessions): 86th percentile
 
 L2 VOL / L3 MICROSTRUCTURE - MIDCPNIFTY
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 14,193.55  basis -46.0 (fut 23-Nov)
-    ATM IV 21.17%  (prev 20.77% on 2026-11-09)
-    Skew (5% OTM put-call) 3.35   PCR 1.09   walls: call 14,500 / put 13,000   max pain 13,800
-    Term structure ATM IV: 23-Nov: 21.17   29-Dec: 17.02   25-Jan: 18.31
-    IV rank (local history, 20 sessions): 75th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 14,322.75  basis +27.4 (fut 23-Nov)
+    ATM IV 19.43%  (prev 21.17% on 2026-11-11)
+    Skew (5% OTM put-call) 0.10   PCR 1.17   walls: call 15,000 / put 13,000   max pain 14,000
+    Term structure ATM IV: 23-Nov: 19.43   29-Dec: 18.19   25-Jan: 18.22
+    IV rank (local history, 21 sessions): 38th percentile
 
 L2 VOL / L3 MICROSTRUCTURE - HDFCBANK
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 806.62  basis -1.7 (fut 23-Nov)
-    ATM IV 25.41%  (prev 24.89% on 2026-11-09)
-    Skew (5% OTM put-call) -0.20   PCR 0.94   walls: call 800 / put 700   max pain 750
-    Term structure ATM IV: 23-Nov: 25.41   29-Dec: 22.88   25-Jan: 22.41
-    IV rank (local history, 20 sessions): 90th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 812.19  basis -1.3 (fut 23-Nov)
+    ATM IV 24.41%  (prev 25.41% on 2026-11-11)
+    Skew (5% OTM put-call) -0.96   PCR 0.94   walls: call 800 / put 700   max pain 750
+    Term structure ATM IV: 23-Nov: 24.41   29-Dec: 22.81   25-Jan: 24.05
+    IV rank (local history, 21 sessions): 81th percentile
 
 L2 VOL / L3 MICROSTRUCTURE - RELIANCE
-    snapshot 2026-11-11  [bhavcopy (EOD)]  spot 1,335.37  basis -0.4 (fut 23-Nov)
-    ATM IV 22.02%  (prev 21.57% on 2026-11-09)
-    Skew (5% OTM put-call) -0.41   PCR 0.79   walls: call 1,350 / put 1,200   max pain 1,260
-    Term structure ATM IV: 23-Nov: 22.02   29-Dec: 23.80   25-Jan: 24.51
-    IV rank (local history, 20 sessions): 35th percentile
+    snapshot 2026-11-12  [bhavcopy (EOD)]  spot 1,338.32  basis +1.8 (fut 23-Nov)
+    ATM IV 22.81%  (prev 22.02% on 2026-11-11)
+    Skew (5% OTM put-call) -0.67   PCR 0.78   walls: call 1,350 / put 1,100   max pain 1,260
+    Term structure ATM IV: 23-Nov: 22.81   29-Dec: 24.62   25-Jan: 24.73
+    IV rank (local history, 21 sessions): 38th percentile
 
   VOL CONTEXT
-    India VIX 17.42  1y rank 80  1y range 9.15 - 27.89
-    NIFTY realized vol: 10d 14.57% / 21d 16.03%  (compare with ATM IV)
+    India VIX 17.56  1y rank 81  1y range 9.15 - 27.89
+    NIFTY realized vol: 10d 13.55% / 21d 15.84%  (compare with ATM IV)
 
 --------------------------------------------------------------------------
   Framework: L1 positioning (weekly) -> L2 volatility (IV rank, skew)
   -> L3 microstructure (walls, PCR, max pain). Data: NSE public sources.
 --------------------------------------------------------------------------
 
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261112_0302.json
-Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261112_0302.html
-weekly digest: not Friday in IST (Thursday) - skipping (use --force to generate)
-rollover special: 11 days to monthly expiry (2026-11-23) - outside 7-day window, skipping
-trends.html written: 3 panels, 791 date points, 55 KB
-  archive: 5 weekly digests, 8 rollover specials
-  - positioning: 265 points, 4 series
-  - options_pcr: 265 points, 4 series
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261113_0306.json
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/monitor_20261113_0306.html
+NSE WEEKLY DIGEST - 2026-11-13
+Headline: FII covering; VIX 17.56 (+1.84); NIFTY roll 13% (prev 9%); BANKNIFTY roll 10% (prev 6%)
+
+POSITIONING (5 sessions: 2026-11-04 -> 2026-11-12)
+  Client  net      57945 (-91,848)   PCR 1.03 (-0.07)
+  DII     net      27148 (-15,170)   PCR 25.46 (+17.88)
+  FII     net     -49719 (+136,260)   PCR 1.03 (-0.08)
+  Pro     net     -35374 (-29,242)   PCR 1.02 (-0.17)
+
+CASH (cumulative, 5 sessions): FII +56,330.7 cr | DII -38,351.5 cr
+
+VOLATILITY: India VIX 17.56 (+1.84), week range 15.19-17.56, 1y rank 81
+  NIFTY       IV 15.45% (+0.64) | PCR 0.85 (-0.23) | spot +5.6%
+  BANKNIFTY   IV 17.52% (+3.75) | PCR 1.28 (+0.29) | spot +10.0%
+  FINNIFTY    IV 19.29% (+4.33) | PCR 1.01 (+0.05) | spot +9.7%
+  MIDCPNIFTY  IV 19.43% (+1.39) | PCR 1.17 (-0.19) | spot +4.4%
+  HDFCBANK    IV 24.41% (+5.32) | PCR 0.94 (+0.09) | spot +10.2%
+  RELIANCE    IV 22.81% (+2.40) | PCR 0.78 (-0.05) | spot +2.1%
+
+ROLLOVER (futures, near -> next month)
+  NIFTY       2026-11-23 in 11d | roll 13% (prev 9%) | spread +154.2pts (+0.61%) | roll-in accelerating; positions carried to next month; carry premium widened
+  BANKNIFTY   2026-11-23 in 11d | roll 10% (prev 6%) | spread +407.8pts (+0.66%) | roll-in accelerating
+  MIDCPNIFTY  2026-11-23 in 11d | roll 6% (prev 3%) | spread +57.1pts (+0.40%) | roll-in accelerating; positions carried to next month
+  HDFCBANK    2026-11-23 in 11d | roll 18% (prev 15%) | spread +5.5pts (+0.68%) | roll-in accelerating; positions carried to next month
+  RELIANCE    2026-11-23 in 11d | roll 20% (prev 17%) | spread +9.8pts (+0.73%) | roll-in accelerating; positions carried to next month
+
+Dashboard: https://posu303-tech.github.io/nse-deriv-monitor/
+
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/weekly_20261113.html
+Saved: /home/runner/work/nse-deriv-monitor/nse-deriv-monitor/output/weekly_20261113.json
+  github issue: created https://api.github.com/repos/posu303-tech/nse-deriv-monitor/issues/14
+rollover special: 10 days to monthly expiry (2026-11-23) - outside 7-day window, skipping
+trends.html written: 3 panels, 793 date points, 55 KB
+  archive: 6 weekly digests, 8 rollover specials
+  - positioning: 266 points, 4 series
+  - options_pcr: 266 points, 4 series
   - volatility: 261 points, 8 series
-evaluating: monitor_20261112_0302.json
-  suppressed (cooldown 7d): fii_futures_shift
-no alerts fired
+evaluating: monitor_20261113_0306.json
+
+NSE Monitor alert - 13-Nov-2026 03:06 IST
+
+* FII index futures net moved +136,260 contracts w/w (now -49,719; reduced shorts / added longs)
+
+Dashboard: https://posu303-tech.github.io/nse-deriv-monitor/
+
+  github issue: created https://api.github.com/repos/posu303-tech/nse-deriv-monitor/issues/15

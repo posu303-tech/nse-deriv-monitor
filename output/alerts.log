@@ -14,3 +14,6 @@
 2026-11-06T02:43:59+05:30 weekly-digest fired delivered=['github-issue']
 2026-11-06T02:44:01+05:30 fired=['fii_futures_shift'] delivered=['github-issue']
     fii_futures_shift: FII index futures net moved +100,585 contracts w/w (now -137,438; reduced shorts / added longs)
+2026-11-13T03:06:06+05:30 weekly-digest fired delivered=['github-issue']
+2026-11-13T03:06:08+05:30 fired=['fii_futures_shift'] delivered=['github-issue']
+    fii_futures_shift: FII index futures net moved +136,260 contracts w/w (now -49,719; reduced shorts / added longs)
