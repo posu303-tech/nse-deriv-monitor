@@ -1,0 +1,238 @@
+{
+  "date": "2026-11-20",
+  "generated_at": "2026-11-20T03:57:19+05:30",
+  "week_span": {
+    "from": "2026-11-12",
+    "to": "2026-11-19"
+  },
+  "participant": {
+    "cur_date": "2026-11-19",
+    "ref_date": "2026-11-12",
+    "rows": {
+      "Client": {
+        "net": 51024,
+        "net_chg": -6921,
+        "pcr": 1.33,
+        "pcr_chg": 0.3
+      },
+      "DII": {
+        "net": 22766,
+        "net_chg": -4382,
+        "pcr": 15.55,
+        "pcr_chg": -9.91
+      },
+      "FII": {
+        "net": -68247,
+        "net_chg": -18528,
+        "pcr": 1.29,
+        "pcr_chg": 0.26
+      },
+      "Pro": {
+        "net": -5543,
+        "net_chg": 29831,
+        "pcr": 1.28,
+        "pcr_chg": 0.26
+      }
+    }
+  },
+  "cash": {
+    "dates": [
+      "2026-11-13",
+      "2026-11-16",
+      "2026-11-17",
+      "2026-11-18",
+      "2026-11-19"
+    ],
+    "totals": {
+      "DII": -10092.17,
+      "FII/FPI": 28074.8
+    }
+  },
+  "vix": {
+    "last": 15.569999694824219,
+    "chg": -1.989999771118164,
+    "week_min": 15.5,
+    "week_max": 16.6200008392334,
+    "rank": 68.65079365079364
+  },
+  "symbols": {
+    "NIFTY": {
+      "date": "2026-11-19",
+      "spot": 25514.3,
+      "atm_iv": 12.65,
+      "pcr": 1.473,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": 0.8496265714336593,
+      "iv_chg": -2.799999999999999,
+      "pcr_chg": 0.6240000000000001
+    },
+    "BANKNIFTY": {
+      "date": "2026-11-19",
+      "spot": 63063.0,
+      "atm_iv": 14.89,
+      "pcr": 1.357,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": 2.5106268845956903,
+      "iv_chg": -2.629999999999999,
+      "pcr_chg": 0.07600000000000007
+    },
+    "FINNIFTY": {
+      "date": "2026-11-19",
+      "spot": 28299.65,
+      "atm_iv": 15.96,
+      "pcr": 1.528,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": 0.8643073156040515,
+      "iv_chg": -3.3299999999999983,
+      "pcr_chg": 0.5190000000000001
+    },
+    "MIDCPNIFTY": {
+      "date": "2026-11-19",
+      "spot": 14206.05,
+      "atm_iv": 16.79,
+      "pcr": 0.934,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": -0.8147876629837181,
+      "iv_chg": -2.6400000000000006,
+      "pcr_chg": -0.239
+    },
+    "HDFCBANK": {
+      "date": "2026-11-19",
+      "spot": 821.75,
+      "atm_iv": 15.16,
+      "pcr": 0.905,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": 1.1770644799862007,
+      "iv_chg": -9.25,
+      "pcr_chg": -0.03799999999999992
+    },
+    "RELIANCE": {
+      "date": "2026-11-19",
+      "spot": 1375.35,
+      "atm_iv": 19.37,
+      "pcr": 0.792,
+      "ref_date": "2026-11-12",
+      "spot_chg_pct": 2.7669017873154456,
+      "iv_chg": -3.4399999999999977,
+      "pcr_chg": 0.013000000000000012
+    }
+  },
+  "rollover": {
+    "NIFTY": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 8745165.0,
+      "next_oi": 5078060.0,
+      "near_settle": 25533.0,
+      "next_settle": 25701.0,
+      "roll_pct": 36.735711094914535,
+      "spread": 168.0,
+      "spread_pct": 0.657972036188462,
+      "near_oi_chg": -3314350.0,
+      "next_oi_chg": 3346395.0,
+      "roll_pct_prev": 12.556322229134853,
+      "spread_prev": 154.20000000000073,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month; carry premium widened"
+    },
+    "BANKNIFTY": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 1459380.0,
+      "next_oi": 955050.0,
+      "near_settle": 63079.6,
+      "next_settle": 63512.4,
+      "roll_pct": 39.555920030814725,
+      "spread": 432.8000000000029,
+      "spread_pct": 0.6861172233178443,
+      "near_oi_chg": -737610.0,
+      "next_oi_chg": 717360.0,
+      "roll_pct_prev": 9.762679284341269,
+      "spread_prev": 407.8000000000029,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month; carry premium widened"
+    },
+    "FINNIFTY": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 26880.0,
+      "next_oi": 1260.0,
+      "near_settle": 28284.3,
+      "next_settle": 28420.4,
+      "roll_pct": 4.477611940298507,
+      "spread": 136.10000000000218,
+      "spread_pct": 0.4811856754453962,
+      "near_oi_chg": -5760.0,
+      "next_oi_chg": 1260.0,
+      "roll_pct_prev": 0.0,
+      "spread_prev": 298.0600000000013,
+      "thin_next": true,
+      "note": "roll-in accelerating; positions carried to next month; next-month OI thin (spread unreliable)"
+    },
+    "MIDCPNIFTY": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 1237200.0,
+      "next_oi": 1150800.0,
+      "near_settle": 14227.4,
+      "next_settle": 14286.8,
+      "roll_pct": 48.19095477386935,
+      "spread": 59.399999999999636,
+      "spread_pct": 0.41750425235812333,
+      "near_oi_chg": -751080.0,
+      "next_oi_chg": 1014600.0,
+      "roll_pct_prev": 6.410980569362856,
+      "spread_prev": 57.149999999999636,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month"
+    },
+    "HDFCBANK": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 96895500.0,
+      "next_oi": 206466000.0,
+      "near_settle": 820.8,
+      "next_settle": 827.35,
+      "roll_pct": 68.05939448479783,
+      "spread": 6.550000000000068,
+      "spread_pct": 0.798001949317747,
+      "near_oi_chg": -160544150.0,
+      "next_oi_chg": 149778200.0,
+      "roll_pct_prev": 18.046114721906665,
+      "spread_prev": 5.5499999999999545,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month"
+    },
+    "RELIANCE": {
+      "date": "2026-11-19",
+      "near_expiry": "2026-11-23",
+      "next_expiry": "2026-12-29",
+      "days_to_expiry": 4,
+      "near_oi": 47137500.0,
+      "next_oi": 101165000.0,
+      "near_settle": 1373.0,
+      "next_settle": 1383.8,
+      "roll_pct": 68.2153031809983,
+      "spread": 10.799999999999955,
+      "spread_pct": 0.7865986890021817,
+      "near_oi_chg": -81222500.0,
+      "next_oi_chg": 69433000.0,
+      "roll_pct_prev": 19.821102865852136,
+      "spread_prev": 9.800000000000182,
+      "thin_next": false,
+      "note": "roll-in accelerating; positions carried to next month"
+    }
+  },
+  "headline": "FII adding shorts; VIX 15.57 (-1.99); NIFTY roll 37% (prev 13%); BANKNIFTY roll 40% (prev 10%)",
+  "text": "NSE WEEKLY DIGEST - 2026-11-20\nHeadline: FII adding shorts; VIX 15.57 (-1.99); NIFTY roll 37% (prev 13%); BANKNIFTY roll 40% (prev 10%)\n\nPOSITIONING (5 sessions: 2026-11-12 -> 2026-11-19)\n  Client  net      51024 (-6,921)   PCR 1.33 (+0.30)\n  DII     net      22766 (-4,382)   PCR 15.55 (-9.91)\n  FII     net     -68247 (-18,528)   PCR 1.29 (+0.26)\n  Pro     net      -5543 (+29,831)   PCR 1.28 (+0.26)\n\nCASH (cumulative, 5 sessions): FII +28,074.8 cr | DII -10,092.2 cr\n\nVOLATILITY: India VIX 15.57 (-1.99), week range 15.50-16.62, 1y rank 69\n  NIFTY       IV 12.65% (-2.80) | PCR 1.47 (+0.62) | spot +0.8%\n  BANKNIFTY   IV 14.89% (-2.63) | PCR 1.36 (+0.08) | spot +2.5%\n  FINNIFTY    IV 15.96% (-3.33) | PCR 1.53 (+0.52) | spot +0.9%\n  MIDCPNIFTY  IV 16.79% (-2.64) | PCR 0.93 (-0.24) | spot -0.8%\n  HDFCBANK    IV 15.16% (-9.25) | PCR 0.91 (-0.04) | spot +1.2%\n  RELIANCE    IV 19.37% (-3.44) | PCR 0.79 (+0.01) | spot +2.8%\n\nROLLOVER (futures, near -> next month)\n  NIFTY       2026-11-23 in 4d | roll 37% (prev 13%) | spread +168.0pts (+0.66%) | roll-in accelerating; positions carried to next month; carry premium widened\n  BANKNIFTY   2026-11-23 in 4d | roll 40% (prev 10%) | spread +432.8pts (+0.69%) | roll-in accelerating; positions carried to next month; carry premium widened\n  FINNIFTY    2026-11-23 in 4d | roll 4% (prev 0%) | spread +136.1pts (+0.48%) | roll-in accelerating; positions carried to next month; next-month OI thin (spread unreliable)\n  MIDCPNIFTY  2026-11-23 in 4d | roll 48% (prev 6%) | spread +59.4pts (+0.42%) | roll-in accelerating; positions carried to next month\n  HDFCBANK    2026-11-23 in 4d | roll 68% (prev 18%) | spread +6.6pts (+0.80%) | roll-in accelerating; positions carried to next month\n  RELIANCE    2026-11-23 in 4d | roll 68% (prev 20%) | spread +10.8pts (+0.79%) | roll-in accelerating; positions carried to next month\n\nDashboard: https://posu303-tech.github.io/nse-deriv-monitor/"
+}
